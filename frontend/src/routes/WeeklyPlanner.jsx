@@ -1,11 +1,16 @@
 import Calendar from 'react-calendar';
+import WeekdaysColumn from '../components/Weekdays';
 
 const WeeklyPlanner = () => {
 
 
 
     return (
-        <Calendar />
+        <div>
+            <Calendar locale="en-GB" />
+            <WeekdaysColumn />
+        </div>
+
     )
 }
 
