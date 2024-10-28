@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import WeekdaysColumn from '../components/Weekdays';
+import '../style/WeeklyPlanner.css';
 
 const WeeklyPlanner = () => {
     const [weekDates, setWeekDates] = useState([]);
@@ -24,8 +25,10 @@ const WeeklyPlanner = () => {
     };
 
     return (
-        <div>
-            <Calendar locale="en-GB" onClickDay={handleDateClick} />
+        <div className="weekly-planner">
+            <div className="calendar-container">
+                <Calendar locale="en-GB" onClickDay={handleDateClick} />
+            </div>
             <WeekdaysColumn weekDates={weekDates} />
         </div>
     );
