@@ -1,0 +1,41 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height to center vertically */
+    background-color: rgba(240, 248, 255, 0.9); /* Light background color with slight transparency */
+    backdrop-filter: blur(10px); /* Adds a blur effect to the background */
+}
+
+.wave-message {
+    font-size: 6rem; /* Increase font size for emphasis */
+    font-weight: bold;
+    color: #ff1493; /* Bright color */
+    text-align: center;
+    display: inline-block; /* Allow the letter animations to work properly */
+}
+
+/* Style for each letter */
+.wave-letter {
+    display: inline-block; /* So each letter can move independently */
+    animation: wave 4s infinite; /* Increase the duration for a slower wave effect */
+}
+
+/* Define the wave animation */
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0); /* Original position */
+    }
+    20% {
+        transform: translateY(-20px); /* Move up */
+    }
+    40% {
+        transform: translateY(10px); /* Move slightly down */
+    }
+    60% {
+        transform: translateY(-10px); /* Move up slightly */
+    }
+    80% {
+        transform: translateY(5px); /* Move down slightly */
+    }
+}

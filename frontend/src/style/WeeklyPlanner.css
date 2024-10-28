@@ -1,6 +1,6 @@
 .weekly-planner {
     display: flex;
-    background-color: rgb(180, 31, 180);
+    background-color: rgb(180, 31, 81);
     flex-direction: column; /* Arrange items vertically */
     align-items: center; /* Center items horizontally */
     padding: 20px;

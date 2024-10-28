@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-around; /* Spread out items across the bar */
     align-items: center; /* Vertically align items */
-    background-color: blueviolet;
+    background-color: rgb(204, 9, 57);
     padding: 15px 20px; /* Add some padding */
   }
   
@@ -32,7 +32,7 @@
   }
   
   .nav-link:hover {
-    background-color: #a70f86;
+    background-color:  #e66060;
     text-decoration: none;
     color: #f4f4f4;
   }
