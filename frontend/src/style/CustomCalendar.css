@@ -1,0 +1,46 @@
+/* Custom styles for react-calendar */
+
+/* Main calendar container */
+.react-calendar {
+    background-color: #f0f8ff; /* Change the calendar background color */
+    border: 2px solid #f3349a; /* Change the border color */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Individual day tiles */
+.react-calendar__tile {
+    background-color: #fff; /* Change the tile background color */
+    color: #333; /* Change the text color */
+    border-radius: 5px; /* Rounded corners for tiles */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+/* Highlighted tile */
+.react-calendar__tile--active {
+    background-color: #f3349a; /* Change background color for the active tile */
+    color: white; /* Change text color for visibility */
+}
+
+/* Current day */
+.react-calendar__tile--now {
+    background-color: #fa2525; /* Change this to your desired color */
+    color: white; /* Change text color for visibility */
+    border-radius: 50%; /* Optional: make it circular */
+}
+
+/* Hover effect */
+.react-calendar__tile:hover {
+    background-color: #e66060; /* Change color on hover */
+}
+
+/* Navigation buttons */
+.react-calendar__navigation {
+    background-color: #ff1493; /* Change navigation bar color */
+    color: white; /* Change the color of navigation buttons */
+}
+
+/* Navigation button styles */
+.react-calendar__navigation__prev-button,
+.react-calendar__navigation__next-button {
+    color: white; /* Change the color of navigation buttons */
+}
