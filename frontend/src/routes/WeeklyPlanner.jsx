@@ -6,6 +6,7 @@ import '../style/CustomCalendar.css';
 
 const WeeklyPlanner = () => {
     const [weekDates, setWeekDates] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null); // Add state for selected date
 
     const getWeekForDate = (date) => {
         const startOfWeek = new Date(date);
@@ -23,6 +24,7 @@ const WeeklyPlanner = () => {
     const handleDateClick = (date) => {
         const week = getWeekForDate(date);
         setWeekDates(week);
+        setSelectedDate(date); // Update the selectedDate when a date is clicked
     };
 
     return (
@@ -31,7 +33,8 @@ const WeeklyPlanner = () => {
                 <Calendar
                     locale="en-GB" onClickDay={handleDateClick} />
             </div>
-            <WeekdaysColumn weekDates={weekDates} />
+
+            <WeekdaysColumn weekDates={weekDates} selectedDate={selectedDate} /> {/* Pass selectedDate to WeekdaysColumn */}
         </div>
     );
 };
