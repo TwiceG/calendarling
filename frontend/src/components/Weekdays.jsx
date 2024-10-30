@@ -1,33 +1,35 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../style/Weekdays.css';
 
 const Weekdays = ({ weekDates, selectedDate }) => {
     const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    const [highlightedIndex, setHighlightedIndex] = useState(null); // State to track highlighted column
-    const [notes, setNotes] = useState(
-        weekdays.reduce((acc, day) => ({ ...acc, [day]: '' }), {})
-    );
+    const [highlightedIndex, setHighlightedIndex] = useState(null);
+    const [notes, setNotes] = useState(weekdays.reduce((acc, day) => ({ ...acc, [day]: '' }), {}));
 
+    const fetchWeekNotes = async () => {
+        const formattedDate = selectedDate.toISOString().split('T')[0];
+        const response = await axios.get(`http://127.0.0.1:8000/api/week-notes`, {
+            params: { date: formattedDate }
+        });
+        return response.data;
+    };
 
-    // // Fetch notes from backend
-    // useEffect(() => {
-    //     const fetchNotes = async () => {
-    //         try {
-    //             const response = await axios.get('http://127.0.0.1:8000/api/notes'); 
-    //             // format { Monday: "note1", Tuesday: "note2", ... }
-    //             setNotes(response.data);
-    //         } catch (error) {
-    //             console.error("Error fetching notes:", error);
-    //         }
-    //     };
+    useEffect(() => {
+        const getNotes = async () => {
+            const noteData = await fetchWeekNotes();
 
-    //     fetchNotes();
-    // }, []);
+            // Update the notes state based on received data
+            const updatedNotes = weekdays.reduce((acc, day, index) => {
+                acc[day] = noteData[index] || '';
+                return acc;
+            }, {});
 
+            setNotes(updatedNotes);
+        };
 
-
+        getNotes();
+    }, [selectedDate]);
 
     const handleNoteChange = (day, event) => {
         setNotes({
@@ -41,8 +43,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
             {weekdays.map((day, index) => {
                 const date = weekDates[index];
                 const isSelected = selectedDate && date && date.toDateString() === selectedDate.toDateString();
-                const isHighlighted = highlightedIndex === index; // Check if the column should be highlighted
-
+                const isHighlighted = highlightedIndex === index;
                 return (
                     <div key={day} className={`column ${isSelected || isHighlighted ? 'highlight' : ''}`}>
                         <div className="day-name">{day}</div>
@@ -51,8 +52,8 @@ const Weekdays = ({ weekDates, selectedDate }) => {
                             className="day-input"
                             value={notes[day]}
                             onChange={(event) => handleNoteChange(day, event)}
-                            onFocus={() => setHighlightedIndex(index)} // Highlight on focus
-                            onBlur={() => setHighlightedIndex(null)} // Remove highlight on blur
+                            onFocus={() => setHighlightedIndex(index)}
+                            onBlur={() => setHighlightedIndex(null)}
                             placeholder={`Write a note for ${day}`}
                         />
                     </div>
