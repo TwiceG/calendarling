@@ -3,44 +3,37 @@
 namespace App\Models\QueryRepositories;
 
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Scalar\String_;
 
 class NoteRepository
 {
     public static function getNotes($date): array
     {
         $dates = self::getDates($date);
-        $notes = [];
+        // Fetch all notes for the week in a single query
+        $notes = DB::table('notes')
+            ->whereIn('date', $dates)
+            ->pluck('note', 'date')
+            ->toArray();
+
+        // Initialize the result array for the week
+        $result = [];
         foreach ($dates as $date) {
-            $notes[] = self::getNote($date);
+            $result[$date] = $notes[$date] ?? '';
         }
 
-        return $notes;
+        return array_values($result);
     }
+
 
     public static function addNote(string $note, string $date): bool
     {
         $dateObject = \DateTime::createFromFormat('Y-m-d', $date);
         $formattedDate = $dateObject ? $dateObject->format('Y-m-d') : $date;
 
-        $noteToUpdate = self::getNote($date);
-
-        if ($noteToUpdate == '') {
-            return DB::table('notes')->insert(
-                [
-                    'date' => $formattedDate,
-                    'note' => $note
-                ]
-            );
-        } else {
-            return DB::table('notes')
-                ->where('date', $formattedDate)
-                ->update(
-                    [
-                        'note' => $note
-                    ]
-                ) > 0;
-        }
+        return DB::table('notes')->updateOrInsert(
+            ['date' => $formattedDate],
+            ['note' => $note]
+        );
     }
 
 
@@ -49,7 +42,9 @@ class NoteRepository
         $dateObject = \DateTime::createFromFormat('Y-m-d', $date);
         $formattedDate = $dateObject ? $dateObject->format('Y-m-d') : $date;
 
-        $note = DB::table('notes')->where('date', $formattedDate)->first();
+        $note = DB::table('notes')->where('date', $formattedDate)->value('note');
+
+        // $note = DB::table('notes')->where('date', $formattedDate)->first(); if need the full data not just the note
 
         return $note ?? '';
     }

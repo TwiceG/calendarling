@@ -11,7 +11,7 @@ class NoteController extends Controller
 {
     public function getWeekNotes(Request $request)
     {
-        $date = $request->json('date');
+        $date = $request->query('date');
         return NoteRepository::getNotes($date);
     }
 
