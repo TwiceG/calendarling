@@ -8,9 +8,9 @@
 }
 
 .wave-message {
-    font-size: 6rem; /* Increase font size for emphasis */
+    font-size: 6rem; 
     font-weight: bold;
-    color: #ff1493; /* Bright color */
+    color: #ff1493; 
     text-align: center;
     display: inline-block; /* Allow the letter animations to work properly */
 }
