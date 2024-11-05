@@ -1,5 +1,6 @@
 .home-container {
     display: flex;
+    flex-direction: column; /* Stack items vertically */
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full height to center vertically */
@@ -13,6 +14,7 @@
     color: #ff1493; 
     text-align: center;
     display: inline-block; /* Allow the letter animations to work properly */
+    margin: 0; /* Reset default margin to keep spacing consistent */
 }
 
 /* Style for each letter */
@@ -38,4 +40,21 @@
     80% {
         transform: translateY(5px); /* Move down slightly */
     }
+}
+
+/* Style for "This is" text */
+.home-container h2 {
+    font-size: 2rem; /* Smaller than the wave-message text */
+    color: #333; /* Dark color for contrast */
+    text-align: center;
+    margin: 0; /* Remove default margin */
+}
+
+/* Style for the name (CalenDarling) */
+.home-container h1:last-of-type {
+    font-size: 4rem; /* Slightly smaller than wave-message */
+    color: #ff1493; /* Matches wave-message color */
+    text-align: center;
+    margin-top: 0.5rem; /* Space between "This is" and name */
+    font-weight: bold;
 }

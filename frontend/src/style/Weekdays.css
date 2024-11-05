@@ -36,3 +36,21 @@
     background-color: #e66060;
     /* border: 2px solid #007bff; */
 }
+
+.note-save-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #5528a7; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.note-save-btn:hover {
+    background-color: #218838; 
+}
+
