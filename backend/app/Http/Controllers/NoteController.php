@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Note;
 use App\Models\QueryRepositories\NoteRepository;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
 class NoteController extends Controller
 {
