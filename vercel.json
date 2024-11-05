@@ -8,7 +8,7 @@
     },
     "routes": [
         {
-            "src": "/api/backend/routes/api.php",
+            "src": "/api/(.*)",
             "dest": "/api/index.php"
         },
         {
@@ -18,4 +18,3 @@
     ],
     "outputDirectory": "frontend/dist"
 }
-
