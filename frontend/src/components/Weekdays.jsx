@@ -9,17 +9,13 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     const [isEdited, setIsEdited] = useState({});
 
     const fetchWeekNotes = async () => {
-        console.log(selectedDate);
         const dateToSend = new Date(selectedDate);
 
-        // Add 1 day to the date
+        // Add 1 day to the date for the backend to get correct selectedDate due to new Date conversation
         dateToSend.setDate(dateToSend.getDate() + 1);
 
         const formattedDate = dateToSend.toISOString().split('T')[0];
-        console.log("Formatted Date to Send:", formattedDate);
 
-
-        // const formattedDate = selectedDate.toISOString().split('T')[0];
         const response = await axios.get(`http://127.0.0.1:8000/api/week-notes`, {
             params: { date: formattedDate }
         });
