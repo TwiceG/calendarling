@@ -16,7 +16,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
 
         const formattedDate = dateToSend.toISOString().split('T')[0];
 
-        const response = await axios.get(`http://127.0.0.1:8000/api/week-notes`, {
+        const response = await axios.get(`http://127.0.0.1:8000/api/week-notes`, {  // `${import.meta.env.VITE_API_URL}/your-endpoint`}
             params: { date: formattedDate }
         });
         return response.data;
@@ -53,7 +53,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         const stringDate = date.toDateString();
 
         const addNote = () => {
-            axios.post('http://127.0.0.1:8000/api/add-note', {
+            axios.post('http://127.0.0.1:8000/api/add-note', { //`${import.meta.env.VITE_API_URL}/your-endpoint`}
                 note: currentNote ?? ' ',
                 date: stringDate
             });
