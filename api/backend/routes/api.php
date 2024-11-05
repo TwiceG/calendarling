@@ -5,15 +5,15 @@ use App\Models\QueryRepositories\NoteRepository;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/test', function () {
-    return response()->json(['message' => 'API is working!']);
-});
+// Route::get('/test', function () {
+//     return response()->json(['message' => 'API is working!']);
+// });
 
-Route::get('/', function () {
-    return response()->json(['message' => 'Root is working!']);
-});
+// Route::get('/', function () {
+//     return response()->json(['message' => 'Root is working!']);
+// });
 
-Route::get('/test-notes/{date}', [NoteRepository::class, 'getNotes']);
+// Route::get('/test-notes/{date}', [NoteRepository::class, 'getNotes']);
 
 Route::get('/week-notes', [NoteController::class, 'getWeekNotes']);
 Route::post('/add-note', [NoteController::class, 'addNote']);
