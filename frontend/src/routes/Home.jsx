@@ -4,6 +4,7 @@ import '../style/Home.css';
 const Home = () => {
     const message1 = "WELCOME"; // First part of the message
     const message2 = "DARLING!"; // Second part of the message
+    const name = "CalenDarling";
 
     return (
         <div className="home-container">
@@ -22,6 +23,8 @@ const Home = () => {
                     </span>
                 ))}
             </h1>
+            <h2>This is </h2>
+            <h1>{name}</h1>
         </div>
     );
 };
