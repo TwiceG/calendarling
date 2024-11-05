@@ -6,14 +6,27 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const [highlightedIndex, setHighlightedIndex] = useState(null);
     const [notes, setNotes] = useState(weekdays.reduce((acc, day) => ({ ...acc, [day]: '' }), {}));
+    const [isEdited, setIsEdited] = useState({});
 
     const fetchWeekNotes = async () => {
-        const formattedDate = selectedDate.toISOString().split('T')[0];
+        console.log(selectedDate);
+        const dateToSend = new Date(selectedDate);
+
+        // Add 1 day to the date
+        dateToSend.setDate(dateToSend.getDate() + 1);
+
+        const formattedDate = dateToSend.toISOString().split('T')[0];
+        console.log("Formatted Date to Send:", formattedDate);
+
+
+        // const formattedDate = selectedDate.toISOString().split('T')[0];
         const response = await axios.get(`http://127.0.0.1:8000/api/week-notes`, {
             params: { date: formattedDate }
         });
         return response.data;
     };
+
+
 
     useEffect(() => {
         const getNotes = async () => {
@@ -36,7 +49,22 @@ const Weekdays = ({ weekDates, selectedDate }) => {
             ...notes,
             [day]: event.target.value
         });
+        setIsEdited({ ...isEdited, [day]: true });
     };
+
+    const handleSubmit = (day, date) => {
+        const currentNote = notes[day];
+        const stringDate = date.toDateString();
+
+        const addNote = () => {
+            axios.post('http://127.0.0.1:8000/api/add-note', {
+                note: currentNote ?? ' ',
+                date: stringDate
+            });
+            setIsEdited({ ...isEdited, [day]: false });
+        }
+        addNote();
+    }
 
     return (
         <div className="columns-container">
@@ -56,6 +84,9 @@ const Weekdays = ({ weekDates, selectedDate }) => {
                             onBlur={() => setHighlightedIndex(null)}
                             placeholder={`Write a note for ${day}`}
                         />
+                        {isEdited[day] && ( // Only show the button if the note is edited
+                            <button className='note-save-btn' onClick={() => handleSubmit(day, date)} type='submit'>Save Note</button>
+                        )}
                     </div>
                 );
             })}
