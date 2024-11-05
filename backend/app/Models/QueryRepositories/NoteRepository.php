@@ -3,12 +3,15 @@
 namespace App\Models\QueryRepositories;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class NoteRepository
 {
     public static function getNotes($date): array
     {
         $dates = self::getDates($date);
+
         // Fetch all notes for the week in a single query
         $notes = DB::table('notes')
             ->whereIn('date', $dates)
@@ -27,11 +30,8 @@ class NoteRepository
 
     public static function addNote(string $note, string $date): bool
     {
-        $dateObject = \DateTime::createFromFormat('Y-m-d', $date);
-        $formattedDate = $dateObject ? $dateObject->format('Y-m-d') : $date;
-
         return DB::table('notes')->updateOrInsert(
-            ['date' => $formattedDate],
+            ['date' => $date],
             ['note' => $note]
         );
     }
