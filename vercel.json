@@ -4,7 +4,7 @@
         "fra1"
     ],
     "functions": {
-        "backend/api/index.php": {
+        "api/index.php": {
             "runtime": "vercel-php@0.7.1"
         }
     },
