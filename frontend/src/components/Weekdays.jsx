@@ -7,7 +7,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     const [highlightedIndex, setHighlightedIndex] = useState(null);
     const [notes, setNotes] = useState(weekdays.reduce((acc, day) => ({ ...acc, [day]: '' }), {}));
     const [isEdited, setIsEdited] = useState({});
-    const API_URL = import.meta.env.VITE_API_URL || 'https://calendarling-dia.vercel.app/api';
+    const API_URL = 'https://calendarling-dia.vercel.app/api';
 
 
     const fetchWeekNotes = async () => {
