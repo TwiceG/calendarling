@@ -28,6 +28,7 @@ const WeeklyPlanner = () => {
 
     const handleDateClick = (date) => {
         const week = getWeekForDate(date);
+        console.log('API URL:', import.meta.env.VITE_API_URL);
         setWeekDates(week);
         setSelectedDate(date); // Update the selectedDate when a date is clicked
     };
