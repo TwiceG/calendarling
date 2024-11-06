@@ -7,7 +7,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     const [highlightedIndex, setHighlightedIndex] = useState(null);
     const [notes, setNotes] = useState(weekdays.reduce((acc, day) => ({ ...acc, [day]: '' }), {}));
     const [isEdited, setIsEdited] = useState({});
-    const API_URL = 'https://calendarling-dia.vercel.app/api';
+    const API_URL = 'https://calendarling-backend.vercel.app/api';
 
 
     const fetchWeekNotes = async () => {
@@ -17,11 +17,8 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         dateToSend.setDate(dateToSend.getDate() + 1);
 
         const formattedDate = dateToSend.toISOString().split('T')[0];
-        console.log('API URL:', import.meta.env.VITE_API_URL);
 
-        console.log(API_URL);
-
-        const response = await axios.get(`${import.meta.env.BASE_URL}/week-notes`, {  // `${import.meta.env.VITE_API_URL}/your-endpoint`}
+        const response = await axios.get(`${API_URL}/week-notes`, {  // `${import.meta.env.VITE_API_URL}/your-endpoint`}
             params: { date: formattedDate }
         });
         return response.data;
