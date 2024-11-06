@@ -1,20 +1,12 @@
 {
     "version": 2,
     "regions": ["fra1"],
-    "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.7.1"
-        }
-    },
     "routes": [
-        {
-            "src": "/api/(.*)",
-            "dest": "/api/index.php"
-        },
+      
         {
             "src": "/(.*)",
-            "dest": "/frontend/dist/$1"
+            "dest": "/dist/$1"
         }
     ],
-    "outputDirectory": "frontend/dist"
+    "outputDirectory": "dist"
 }
