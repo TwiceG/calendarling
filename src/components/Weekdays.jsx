@@ -17,8 +17,11 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         dateToSend.setDate(dateToSend.getDate() + 1);
 
         const formattedDate = dateToSend.toISOString().split('T')[0];
+        console.log('API URL:', import.meta.env.VITE_API_URL);
 
-        const response = await axios.get(`${API_URL}/week-notes`, {  // `${import.meta.env.VITE_API_URL}/your-endpoint`}
+        console.log(API_URL);
+
+        const response = await axios.get(`${import.meta.env.BASE_URL}/week-notes`, {  // `${import.meta.env.VITE_API_URL}/your-endpoint`}
             params: { date: formattedDate }
         });
         return response.data;
