@@ -1,5 +1,18 @@
 /* Custom styles for react-calendar */
 
+/* Adjust calendar layout for smaller screens */
+@media (max-width: 768px) {
+    .react-calendar {
+        width: 100%; /* Full width on mobile */
+        font-size: 0.8rem; /* Slightly smaller font size for mobile */
+    }
+
+    .react-calendar__navigation {
+        padding: 10px;
+    }
+}
+
+
 /* Main calendar container */
 .react-calendar {
     background-color: #f0f8ff; /* Change the calendar background color */

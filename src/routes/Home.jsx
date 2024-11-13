@@ -9,19 +9,20 @@ const Home = () => {
     return (
         <div className="home-container">
             <h1 className="wave-message">
-                {message1.split('').map((letter, index) => (
-                    <span key={index} className="wave-letter" style={{ animationDelay: `${index * 0.1}s` }}>
-                        {letter}
-                    </span>
-                ))}
-                {/* Add space between the two messages */}
-                <span className="space">   </span>
-
-                {message2.split('').map((letter, index) => (
-                    <span key={index + message1.length} className="wave-letter" style={{ animationDelay: `${(index + message1.length) * 0.1}s` }}>
-                        {letter}
-                    </span>
-                ))}
+                <span className="message-line">
+                    {message1.split('').map((letter, index) => (
+                        <span key={index} className="wave-letter" style={{ animationDelay: `${index * 0.1}s` }}>
+                            {letter}
+                        </span>
+                    ))}
+                </span>
+                <span className="message-line">
+                    {message2.split('').map((letter, index) => (
+                        <span key={index + message1.length} className="wave-letter" style={{ animationDelay: `${(index + message1.length) * 0.1}s` }}>
+                            {letter}
+                        </span>
+                    ))}
+                </span>
             </h1>
             <h2>This is </h2>
             <h1>{name}</h1>

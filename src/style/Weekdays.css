@@ -1,3 +1,20 @@
+@media (max-width: 768px) {
+    .columns-container {
+        flex-direction: column; /* Stack columns vertically */
+        padding: 5px;
+    }
+
+    .column {
+        flex: 1 1 100%; /* Full width for each day */
+        margin-bottom: 10px;
+    }
+
+    .day-input {
+        height: 100px; /* Adjust height for mobile */
+    }
+}
+
+
 .columns-container {
     display: flex;
     justify-content: space-around;

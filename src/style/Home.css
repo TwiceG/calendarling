@@ -1,60 +1,79 @@
+/* Container and general styling */
 .home-container {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center;
+    flex-direction: column;
+    justify-content: center; /* Vertically center content */
     align-items: center;
-    height: 100vh; /* Full height to center vertically */
-    background-color: rgba(240, 248, 255, 0.9); /* Light background color with slight transparency */
-    backdrop-filter: blur(10px); /* Adds a blur effect to the background */
-}
-
-.wave-message {
-    font-size: 6rem; 
-    font-weight: bold;
-    color: #ff1493; 
-    text-align: center;
-    display: inline-block; /* Allow the letter animations to work properly */
-    margin: 0; /* Reset default margin to keep spacing consistent */
-}
-
-/* Style for each letter */
-.wave-letter {
-    display: inline-block; /* So each letter can move independently */
-    animation: wave 4s infinite; /* Increase the duration for a slower wave effect */
-}
-
-/* Define the wave animation */
-@keyframes wave {
-    0%, 100% {
-        transform: translateY(0); /* Original position */
-    }
-    20% {
-        transform: translateY(-20px); /* Move up */
-    }
-    40% {
-        transform: translateY(10px); /* Move slightly down */
-    }
-    60% {
-        transform: translateY(-10px); /* Move up slightly */
-    }
-    80% {
-        transform: translateY(5px); /* Move down slightly */
-    }
-}
-
-/* Style for "This is" text */
-.home-container h2 {
-    font-size: 2rem; /* Smaller than the wave-message text */
-    color: #333; /* Dark color for contrast */
+    min-height: calc(100vh - 120px); /* Ensure container height adjusts based on viewport minus padding */
+    background-color: rgba(240, 248, 255, 0.9);
+    backdrop-filter: blur(10px);
     text-align: center;
     margin: 0; /* Remove default margin */
+    padding-top: 60px; /* Push content below navbar */
+    padding-bottom: 60px; /* Bottom padding */
+    box-sizing: border-box; /* Ensure padding is included in the height/width calculation */
 }
 
-/* Style for the name (CalenDarling) */
-.home-container h1:last-of-type {
-    font-size: 4rem; /* Slightly smaller than wave-message */
-    color: #ff1493; /* Matches wave-message color */
-    text-align: center;
-    margin-top: 0.5rem; /* Space between "This is" and name */
+/* Wave message styling */
+.wave-message {
+    font-size: 6rem;
     font-weight: bold;
+    color: #ff1493;
+    margin: 0; /* Remove margin around wave message */
+}
+
+/* Styling each line */
+.message-line {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* Add more space between message1 and message2 */
+.message-line:nth-child(2) {
+    margin-top: 1rem; /* Add space between message1 and message2 */
+}
+
+/* Letter animation effect */
+.wave-letter {
+    display: inline-block;
+    animation: wave 4s ease-in-out infinite; /* Make wave effect smooth and continuous */
+}
+
+/* Wave animation keyframes for synchronized wave effect */
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-20px); }
+    50% { transform: translateY(10px); }
+    75% { transform: translateY(-10px); }
+}
+
+/* Styling for "This is" text */
+.home-container h2 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0; /* Remove margin for the "This is" text */
+}
+
+/* Styling for name (CalenDarling) */
+.home-container h1:last-of-type {
+    font-size: 4rem;
+    color: #ff1493;
+    margin-top: 0; /* Remove margin-top to reduce space */
+    font-weight: bold;
+    margin-bottom: 0; /* Remove bottom margin to ensure it is the last block */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .wave-message {
+        font-size: 15vw;
+    }
+    
+    .home-container h2 {
+        font-size: 5vw;
+    }
+
+    .home-container h1:last-of-type {
+        font-size: 7vw;
+    }
 }
