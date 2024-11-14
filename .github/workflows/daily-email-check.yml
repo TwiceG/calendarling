@@ -3,7 +3,7 @@ name: Daily Email Check
 on:
   schedule:
     # Schedule the job to run every day  UTC
-    - cron: "7  10 * * *"
+    - cron: "0  4 * * *"
       #     *    *    *    *    *
       # |    |    |    |    |
       # |    |    |    |    +----- day of the week (0 - 7) (Sunday=0 or 7)

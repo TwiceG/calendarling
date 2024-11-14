@@ -1,6 +1,6 @@
 // (for GitHub Actions)
-const axios = require('axios');
-const emailjs = require('emailjs-com');
+import axios from 'axios';
+import emailjs from 'emailjs-com';
 
 const serviceId = process.env.EMAILJS_SERVICE_ID;
 const templateId = process.env.EMAILJS_TEMPLATE_ID;
