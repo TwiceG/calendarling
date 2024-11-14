@@ -20,12 +20,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Print current working directory
-        run: pwd # Prints the current working directory
-
-      - name: List files in the root directory
-        run: ls -la
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -35,10 +29,10 @@ jobs:
         run: npm install
 
       - name: Run daily email check
-        run: node checkEmail.js
         env:
           EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           EMAILJS_USER_ID: ${{ secrets.EMAILJS_USER_ID }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
+        run: node checkEmail.js

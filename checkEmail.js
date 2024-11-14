@@ -1,17 +1,21 @@
 // (for GitHub Actions)
 import axios from 'axios';
 import emailjs from 'emailjs-com';
+import { config } from 'dotenv';
 
+config();
 const serviceId = process.env.EMAILJS_SERVICE_ID;
 const templateId = process.env.EMAILJS_TEMPLATE_ID;
 const userId = process.env.EMAILJS_USER_ID;
 const FLY_API = 'https://calendarling-backend.fly.dev/api';
+const email = process.env.MY_EMAIL;
+console.log(serviceId,userId,templateId,email);
 
 const sendEmail = (note, date) => {
     const templateParams = {
         note,
         date,
-        user_email: process.env.MY_EMAIL
+        user_email: email
     };
 
     emailjs.send(serviceId, templateId, templateParams, userId)
