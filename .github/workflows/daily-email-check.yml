@@ -38,4 +38,4 @@ jobs:
           EMAILJS_USER_ID: ${{ secrets.EMAILJS_USER_ID }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
-        run: node ./checkEmail.js
+        node /home/runner/work/calendarling/calendarling/src/scripts/checkEmail.js
