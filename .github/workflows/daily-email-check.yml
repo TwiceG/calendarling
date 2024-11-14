@@ -23,33 +23,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18" # Ensure we're using a Node.js version compatible with your setup.
+          node-version: "18"
 
-      # Cache node_modules to speed up the install process
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-  # Restore cache using the package-lock.json hash
-
-      # Optionally clear Node.js cache if previous versions were cached
       - name: Clear Node.js cache
         run: npm cache clean --force
 
       - name: Install dependencies
-        run: npm install # Install dependencies specified in package.json
-
-      - name: Check node_modules
-        run: ls node_modules # List the node_modules to confirm dependencies are installed
-
-      # Check the directory and run the script to ensure everything is correct
-      - name: Check directory and run script
-        run: |
-          pwd  # Print working directory to verify it's correct
-          ls  # List files to confirm presence of checkEmail.js
-          node ./checkEmail.js  # Run the checkEmail.js script to verify functionality
+        run: npm install
 
       - name: Run daily email check
         env:
