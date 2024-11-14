@@ -2,8 +2,8 @@ name: Daily Email Check
 
 on:
   schedule:
-    # Schedule the job to run every day  UTC
-    - cron: "0  4 * * *"
+    # Schedule the job to run every day UTC
+    - cron: "0 4 * * *"
       #     *    *    *    *    *
       # |    |    |    |    |
       # |    |    |    |    +----- day of the week (0 - 7) (Sunday=0 or 7)
@@ -25,11 +25,30 @@ jobs:
         with:
           node-version: "18"
 
+      # Cache node_modules to speed up the install process
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      # Optionally clear Node.js cache if previous versions were cached
+      - name: Clear Node.js cache
+        run: npm cache clean --force
+
       - name: Install dependencies
-        run: npm install 
+        run: npm install
 
       - name: Check node_modules
         run: ls node_modules
+
+      # Check the directory and run the script to ensure everything is correct
+      - name: Check directory and run script
+        run: |
+          pwd  # Print working directory to verify it's correct
+          node ./checkEmail.js
 
       - name: Run daily email check
         env:
@@ -38,6 +57,4 @@ jobs:
           EMAILJS_USER_ID: ${{ secrets.EMAILJS_USER_ID }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
-       run: node ./checkEmail.js
-
-
+        run: node ./checkEmail.js
