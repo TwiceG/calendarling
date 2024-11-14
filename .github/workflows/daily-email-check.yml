@@ -26,7 +26,7 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: npm install
+        run: npm install axios emailjs-com
 
       - name: Run daily email check
         env:
@@ -35,4 +35,5 @@ jobs:
           EMAILJS_USER_ID: ${{ secrets.EMAILJS_USER_ID }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
-        run: node checkEmail.js
+       run: node ./src/scripts/checkEmail.js
+
