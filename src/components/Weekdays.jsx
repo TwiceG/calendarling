@@ -63,7 +63,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
 
     const handleDeleteNote = (date) => {
         axios.delete(`${import.meta.env.VITE_API_URL}/delete-note`, {
-            date: date
+            data: { date }
         });
     };
 
