@@ -21,15 +21,17 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         return response.data;
     };
 
+
+    const getNotes = async () => {
+        const noteData = await fetchWeekNotes();
+        const updatedNotes = weekdays.reduce((acc, day, index) => {
+            acc[day] = noteData[index] || '';
+            return acc;
+        }, {});
+        setNotes(updatedNotes);
+    };
+
     useEffect(() => {
-        const getNotes = async () => {
-            const noteData = await fetchWeekNotes();
-            const updatedNotes = weekdays.reduce((acc, day, index) => {
-                acc[day] = noteData[index] || '';
-                return acc;
-            }, {});
-            setNotes(updatedNotes);
-        };
         getNotes();
     }, [selectedDate]);
 
@@ -69,6 +71,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
 
     const handleConfirmDelete = () => {
         handleDeleteNote(modalData.date);
+        getNotes(); // Refresh notes after deletion
         setIsModalOpen(false); // Close the modal
         setSelectedColumn(null); // Reset the selected column after deletion
     };
