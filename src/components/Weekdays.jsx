@@ -74,8 +74,8 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         getNotes(); // Refresh notes after deletion
     };
 
-    const handleConfirmDelete = async () => {
-        await handleDeleteNote(modalData.date);
+    const handleConfirmDelete = () => {
+        handleDeleteNote(modalData.date);
 
         // Update the notes state to remove the deleted note
         setNotes(prevNotes => ({
