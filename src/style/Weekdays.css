@@ -49,6 +49,7 @@
     box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
+
 .column.highlight {
     background-color: #e66060;
     /* border: 2px solid #007bff; */
@@ -70,4 +71,34 @@
 .note-save-btn:hover {
     background-color: #218838; 
 }
+
+.note-delete-btn {
+    display: none; 
+    margin-top: 10px;
+    margin-left: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #c62828; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.note-delete-btn:hover {
+    background-color: #b71c1c; 
+}
+
+/* Initially hide delete button */
+.column .note-delete-btn {
+    display: none;
+}
+
+/* Show delete button when the column is selected */
+.column.highlight .note-delete-btn {
+    display: inline-block;
+}
+
+
 
