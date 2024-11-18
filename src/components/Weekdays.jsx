@@ -76,6 +76,10 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     const handleConfirmDelete = () => {
         handleDeleteNote(modalData.date);
 
+        // Close the modal and reset the selected column
+        setIsModalOpen(false);
+        setSelectedColumn(null);
+
         //Create a copy of the current notes state
         const updatedNotes = { ...notes };
 
@@ -83,9 +87,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         updatedNotes[modalData.day] = '';
         setNotes(updatedNotes);
 
-        // Close the modal and reset the selected column
-        setIsModalOpen(false);
-        setSelectedColumn(null);
+
     };
 
 
