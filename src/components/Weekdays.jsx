@@ -5,9 +5,11 @@ import Modal from './Modal';
 
 const Weekdays = ({ weekDates, selectedDate }) => {
     const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    const [selectedColumn, setSelectedColumn] = useState(null); // Track selected column for deletion
     const [notes, setNotes] = useState(weekdays.reduce((acc, day) => ({ ...acc, [day]: '' }), {}));
+
+    const [selectedColumn, setSelectedColumn] = useState(null); // Track selected column for deletion
     const [isEdited, setIsEdited] = useState({});
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({ day: '', date: null });
 
@@ -72,11 +74,19 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         getNotes(); // Refresh notes after deletion
     };
 
-    const handleConfirmDelete = () => {
-        handleDeleteNote(modalData.date);
+    const handleConfirmDelete = async () => {
+        await handleDeleteNote(modalData.date);
+
+        // Update the notes state to remove the deleted note
+        setNotes(prevNotes => ({
+            ...prevNotes,
+            [modalData.day]: ''
+        }));
+
         setIsModalOpen(false); // Close the modal
         setSelectedColumn(null); // Reset the selected column after deletion
     };
+
 
     return (
         <div className="columns-container">
