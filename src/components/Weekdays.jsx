@@ -35,6 +35,8 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         getNotes();
     }, [selectedDate]);
 
+
+
     const handleNoteChange = (day, event) => {
         setNotes({
             ...notes,
@@ -67,11 +69,11 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         axios.delete(`${import.meta.env.VITE_API_URL}/delete-note`, {
             data: { date }
         });
+        getNotes(); // Refresh notes after deletion
     };
 
     const handleConfirmDelete = () => {
         handleDeleteNote(modalData.date);
-        getNotes(); // Refresh notes after deletion
         setIsModalOpen(false); // Close the modal
         setSelectedColumn(null); // Reset the selected column after deletion
     };
