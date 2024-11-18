@@ -74,18 +74,27 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         getNotes(); // Refresh notes after deletion
     };
 
+
     const handleConfirmDelete = () => {
         handleDeleteNote(modalData.date);
 
-        // Update the notes state to remove the deleted note
+        //Save the current state (before modifying)
+        const previousNotes = { ...notes };
+
+        //Clear all notes
+        setNotes({});
+
+        // Fill notes for rerender
         setNotes(prevNotes => ({
-            ...prevNotes,
+            ...previousNotes,
             [modalData.day]: ''
         }));
 
-        setIsModalOpen(false); // Close the modal
-        setSelectedColumn(null); // Reset the selected column after deletion
+        // Close the modal and reset the selected column
+        setIsModalOpen(false);
+        setSelectedColumn(null);
     };
+
 
 
     return (
