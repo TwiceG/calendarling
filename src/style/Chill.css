@@ -1,0 +1,45 @@
+/* Mobile-first styles */
+@media (max-width: 768px) {
+    .chill-container {
+        display: flex;
+        justify-content: center; /* Center the button horizontally */
+        padding: 10px;
+    }
+
+    .chill-btn {
+        padding: 15px 25px;
+        font-size: 18px;
+        background-color: rgb(238, 106, 220);
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .chill-btn:hover {
+        background-color: #5528a7;
+    }
+}
+
+/* Desktop styles */
+.chill-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    padding: 20px;
+}
+
+.chill-btn {
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: rgb(238, 106, 220);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chill-btn:hover {
+    background-color: #5528a7;
+}

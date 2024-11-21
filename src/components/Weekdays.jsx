@@ -86,8 +86,6 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         //Clear note
         updatedNotes[modalData.day] = '';
         setNotes(updatedNotes);
-
-
     };
 
 

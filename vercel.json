@@ -1,12 +1,14 @@
 {
     "version": 2,
     "regions": ["fra1"],
-    "routes": [
-      
+    "outputDirectory": "dist",
+
+    "rewrites": [
+
         {
-            "src": "/(.*)",
-            "dest": "/dist/$1"
+          "source": "/:any*",
+          "destination": "/index.html"
         }
-    ],
-    "outputDirectory": "dist"
+      ]
 }
+
