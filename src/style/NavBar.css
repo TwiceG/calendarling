@@ -1,28 +1,34 @@
-
-
+/* Navbar container */
 .navbar {
     display: flex;
-    justify-content: space-around; /* Spread out items across the bar */
-    align-items: center; 
+    justify-content: space-between; /* Space between items, aligning the home button to the center */
+    align-items: center;
     background-color: rgb(204, 9, 57);
-    padding: 15px 20px; 
+    padding: 15px 20px;
+    position: relative;
 }
-  
+
+/* Navbar list that holds all nav items */
 .nav-list {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
+    width: 100%; /* Make the nav list span the entire width of the navbar */
+    justify-content: center; /* This ensures the Home button is centered */
 }
-  
+
+/* Individual nav items */
 .nav-item {
     margin-right: 30px; /* Space between items */
 }
-  
+
+/* Remove margin for the last item */
 .nav-item:last-child {
-    margin-right: 0; /* Remove margin for the last item */
+    margin-right: 0;
 }
-  
+
+/* Styling the links */
 .nav-link {
     color: #fff;
     text-decoration: none;
@@ -31,9 +37,26 @@
     transition: background-color 0.3s ease;
     border-radius: 5px; /* Rounded corners */
 }
-  
+
+/* Hover effect for links */
 .nav-link:hover {
-    background-color:   rgb(238, 106, 220);
-    text-decoration: none;
+    background-color: rgb(238, 106, 220);
     color: #f4f4f4;
+}
+
+/* This will push user actions (login, register, logout) to the right */
+.user-actions {
+    position: absolute;  /* This makes the user-actions div float to the right */
+    right: 20px;         /* Position it near the right edge */
+    display: flex;       /* Make it a flex container */
+    gap: 20px;           /* Space between the buttons */
+    align-items: center; /* Align the buttons vertically if needed */
+}
+
+/* Remove the unnecessary <ul> around the user-actions */
+.auth-list {
+    display: flex; /* Ensures the items inside auth-list are in a row */
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
