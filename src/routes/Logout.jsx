@@ -14,7 +14,7 @@ const Logout = () => {
 
     // Clear user data from localStorage
     const clearUserData = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('authToken');
         localStorage.removeItem('username');
     };
 
