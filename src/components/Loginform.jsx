@@ -32,7 +32,7 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('api/login', {
+            const response = await axios.post('/login', {
                 email: email,
                 password: password,
             });
@@ -42,6 +42,7 @@ const LoginForm = () => {
 
             storeUserName(response.data.user.name);
             clearLoginStatus();
+            window.location.href = '/';
             // window.location.href = '/two-factor-verification';
 
         } catch (error) {
