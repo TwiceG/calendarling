@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between; /* Space between items, aligning the home button to the center */
     align-items: center;
-    background-color:#FF416C;;
+    background-color: #FF416C;
     padding: 15px 20px;
     position: relative;
 }
@@ -59,4 +59,28 @@
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+/* Responsive adjustments for small screens */
+@media screen and (max-width: 768px) {
+    /* Reduce the size of the navbar */
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    /* Navbar list that holds all nav items */
+    .nav-list {
+        justify-content: flex-start; /* Align items to the left */
+        width: auto;  /* Allow list to shrink to fit items */
+    }
+
+    /* Navbar items */
+    .nav-item {
+        margin-right: 20px;  /* Reduced spacing between items */
+    }
+
+    /* Adjust font size on mobile */
+    .nav-link {
+        font-size: 14px;  /* Smaller font size for mobile */
+    }
 }
