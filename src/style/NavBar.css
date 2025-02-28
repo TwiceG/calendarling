@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between; /* Space between items, aligning the home button to the center */
     align-items: center;
-    background-color: rgb(204, 9, 57);
+    background-color:#FF416C;;
     padding: 15px 20px;
     position: relative;
 }

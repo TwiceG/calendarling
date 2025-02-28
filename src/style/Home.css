@@ -5,7 +5,7 @@
     justify-content: center; /* Vertically center content */
     align-items: center;
     min-height: calc(100vh - 120px); /* Ensure container height adjusts based on viewport minus padding */
-    background-color: rgba(240, 248, 255, 0.9);
+    background-color:  #FF73A3;
     backdrop-filter: blur(10px);
     text-align: center;
     margin: 0; /* Remove default margin */
@@ -57,7 +57,7 @@
 /* Styling for name (CalenDarling) */
 .home-container h1:last-of-type {
     font-size: 4rem;
-    color: #ff1493;
+    color:  #ff1493;
     margin-top: 0; /* Remove margin-top to reduce space */
     font-weight: bold;
     margin-bottom: 0; /* Remove bottom margin to ensure it is the last block */
