@@ -7,9 +7,7 @@ import axios from 'axios';
 
 function App() {
 
-  // axios.defaults.baseURL = 'http://localhost:8000/api';
-  axios.defaults.baseURL = 'https://calendarling-backend.fly.dev/api';
-  axios.defaults.withCredentials = true; // Required for cookies to be sent
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
   return (
     <div className='App'>
