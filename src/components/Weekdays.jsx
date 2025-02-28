@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../style/Weekdays.css';
 import Modal from './Modal';
+import CryptoJS from "crypto-js";
 
 const Weekdays = ({ weekDates, selectedDate }) => {
     const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -13,11 +14,25 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState({ day: '', date: null });
 
+
+
+    const decryptToken = () => {
+
+        const secretKey = import.meta.env.VITE_SECRET_KEY;
+        const encryptedToken = localStorage.getItem('authToken');
+        const decryptedToken = CryptoJS.AES.decrypt(encryptedToken, secretKey).toString(CryptoJS.enc.Utf8);
+        return decryptedToken;
+    };
+
     const fetchWeekNotes = async () => {
         const dateToSend = new Date(selectedDate);
         dateToSend.setDate(dateToSend.getDate() + 1);
         const formattedDate = dateToSend.toISOString().split('T')[0];
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/week-notes`, {
+        const token = decryptToken();
+        const response = await axios.get('/week-notes', {
+            headers: {
+                'Authorization': `Bearer ${token}` // Send the decrypted token
+            },
             params: { date: formattedDate }
         });
         return response.data;
@@ -26,6 +41,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
 
     const getNotes = async () => {
         const noteData = await fetchWeekNotes();
+        console.log(noteData);
         const updatedNotes = weekdays.reduce((acc, day, index) => {
             acc[day] = noteData[index] || '';
             return acc;
@@ -50,9 +66,13 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     const handleSubmit = (day, date) => {
         const currentNote = notes[day];
         const stringDate = date.toDateString();
+        const token = decryptToken();
 
         const addNote = () => {
-            axios.post(`${import.meta.env.VITE_API_URL}/add-note`, {
+            axios.post('/add-note', {
+                headers: {
+                    'Authorization': `Bearer ${token}` // Send the decrypted token
+                },
                 note: currentNote ?? ' ',
                 date: stringDate
             });
@@ -68,7 +88,11 @@ const Weekdays = ({ weekDates, selectedDate }) => {
     };
 
     const handleDeleteNote = (date) => {
-        axios.delete(`${import.meta.env.VITE_API_URL}/delete-note`, {
+        const token = decryptToken();
+        axios.delete('/delete-note', {
+            headers: {
+                'Authorization': `Bearer ${token}` // Send the decrypted token
+            },
             data: { date }
         });
     };
