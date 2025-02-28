@@ -66,7 +66,7 @@
 /* Responsive styling */
 @media (max-width: 768px) {
     .wave-message {
-        font-size: 15vw;
+        font-size: 15vw !important;
     }
     
     .home-container h2 {
@@ -74,6 +74,6 @@
     }
 
     .home-container h1:last-of-type {
-        font-size: 7vw;
+        font-size: 7vw !important;
     }
 }
