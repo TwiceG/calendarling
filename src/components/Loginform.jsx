@@ -53,18 +53,20 @@ const LoginForm = () => {
 
     return (
         <div>
-            <form onSubmit={handleLogin}>
-                <h1>Login</h1>
-                <h2>Feel free to login and start use the Calendar and more!!</h2>
+            <div className='form-container'>
+                <form onSubmit={handleLogin}>
+                    <h1 id='title'>Sign In</h1>
+                    <h3>Feel free to login and start use the Calendar and more!!</h3>
 
-                {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+                    {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
 
-                <Input type='email' placeholder='Email' item={email} setItem={setEmail} />
-                <Input type='password' placeholder='Password' item={password} setItem={setPassword} />
+                    <Input type='email' placeholder='Email' item={email} setItem={setEmail} />
+                    <Input type='password' placeholder='Password' item={password} setItem={setPassword} />
 
-                <button type='submit'>Login</button>
-            </form>
-            {/* <Link to={'/password-recovery'} >Forgot your password?</Link> */}
+                    <button type='submit'>Login</button>
+                </form>
+                {/* <Link to={'/password-recovery'} >Forgot your password?</Link> */}
+            </div>
         </div>
     );
 };

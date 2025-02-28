@@ -31,29 +31,35 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      <Input type="text" placeholder="Name" minLength={6} title="Enter your name here" item={name} setItem={setName} />
-      <Input type="email" placeholder="Email" title="Enter your email here" item={email} setItem={setEmail} />
-      <Input
-        type="password"
-        placeholder="Password"
-        minLength={6}
-        title="Password must be at least 6 characters long and contain at least one uppercase letter and one number"
-        pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$"
-        item={password}
-        setItem={setPassword}
-      />
-      <Input
-        type="password"
-        placeholder="Confirm Password"
-        minLength={6}
-        title="Re-enter your password"
-        item={confirmPassword}
-        setItem={setConfirmPassword}
-      />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button type="submit">Register</button>
-    </form>
+    <div>
+      <div className='form-container'>
+        <form onSubmit={handleRegister}>
+          <h1>Create account</h1>
+          <h3>use your email for registration</h3>
+          <Input type="text" placeholder="Name" minLength={6} title="Enter your name here" item={name} setItem={setName} />
+          <Input type="email" placeholder="Email" title="Enter your email here" item={email} setItem={setEmail} />
+          <Input
+            type="password"
+            placeholder="Password"
+            minLength={6}
+            title="Password must be at least 6 characters long and contain at least one uppercase letter and one number"
+            pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$"
+            item={password}
+            setItem={setPassword}
+          />
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            minLength={6}
+            title="Re-enter your password"
+            item={confirmPassword}
+            setItem={setConfirmPassword}
+          />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </div>
   );
 };
 
