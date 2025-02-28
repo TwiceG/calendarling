@@ -34,10 +34,7 @@ const NavBar = () => {
                 <div className="user-actions">
                     <ul className="auth-list">
                         <li className="nav-item">
-                            <Link to="/login" className="nav-link">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/register" className="nav-link">Register</Link>
+                            <Link to="/login-register" className="nav-link">Login/Register</Link>
                         </li>
                     </ul>
                 </div>

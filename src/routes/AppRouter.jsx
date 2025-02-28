@@ -3,8 +3,8 @@ import Home from "./Home";
 import WeeklyPlanner from "./WeeklyPlanner";
 import Chill from "./Chill";
 import Regristration from "./Registration";
-import Login from "./Login";
 import Logout from "./Logout";
+import Auth from "./Auth";
 
 
 function AppRouter() {
@@ -13,7 +13,7 @@ function AppRouter() {
             <Route path="/" element={<Home />} />
             <Route path="/week-planner" element={<WeeklyPlanner />} />
             <Route path="/chill" element={<Chill />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login-register" element={<Auth />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Regristration />} />
         </Routes>

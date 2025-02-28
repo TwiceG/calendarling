@@ -40,7 +40,7 @@
 
 /* Hover effect for links */
 .nav-link:hover {
-    background-color: rgb(238, 106, 220);
+    background-color: #fd88b1;
     color: #f4f4f4;
 }
 
