@@ -1,5 +1,6 @@
 /* Navbar container */
 .navbar {
+    position: relative;
     display: flex;
     justify-content: space-between; /* Space between items, aligning the home button to the center */
     align-items: center;
@@ -7,6 +8,7 @@
     padding: 15px 20px;
     position: relative;
 }
+
 
 /* Navbar list that holds all nav items */
 .nav-list {
@@ -46,12 +48,13 @@
 
 /* This will push user actions (login, register, logout) to the right */
 .user-actions {
-    position: absolute;  /* This makes the user-actions div float to the right */
-    right: 20px;         /* Position it near the right edge */
-    display: flex;       /* Make it a flex container */
+    display: flex;       /* Ensure items are displayed in a row */
     gap: 20px;           /* Space between the buttons */
-    align-items: center; /* Align the buttons vertically if needed */
+    align-items: center; /* Align vertically if needed */
+    justify-content: flex-end; /* Align to the right side of the navbar */
+    margin-left: auto;   /* Push the items to the far right */
 }
+
 
 /* Remove the unnecessary <ul> around the user-actions */
 .auth-list {
@@ -60,6 +63,14 @@
     margin: 0;
     padding: 0;
 }
+
+#home {
+    position: absolute;  /* Position the home button independently of the flex layout */
+    top: 50%;  /* Center vertically */
+    left: 50%;  /* Center horizontally */
+    transform: translate(-50%, -90%);  /* Adjust the button's position to truly center it */
+}
+
 
 /* Responsive adjustments for small screens */
 @media screen and (max-width: 768px) {
@@ -83,4 +94,12 @@
     .nav-link {
         font-size: 14px;  /* Smaller font size for mobile */
     }
+    #home {
+        position:absolute;
+        margin-left: -100px;
+        transform: translate(-80%, -90%)
+    }
+     
 }
+
+

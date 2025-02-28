@@ -24,7 +24,7 @@ const RegisterForm = () => {
         password,
       });
       console.log('Registration successful', response.data.message);
-      window.location.href = 'Login';
+      window.location.href = '/login-register';
     } catch (error) {
       console.error('Registration error:', error.response.data.message);
     }
