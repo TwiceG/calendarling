@@ -171,6 +171,5 @@ return (
         />
     </div>
 );
-};
 
 export default Weekdays;
