@@ -71,7 +71,7 @@ const Weekdays = ({ weekDates, selectedDate }) => {
         const addNote = () => {
             axios.post('/add-note',
                 {
-                    note: currentNote ?? ' ',  // Default to empty string if note isn't changed
+                    note: currentNote ?? ' ',  // Default to empty string if note isn't change
                     date: stringDate
                 },
                 {
@@ -86,90 +86,92 @@ const Weekdays = ({ weekDates, selectedDate }) => {
                 .catch(error => {
                     console.error('Error adding note:', error);
                 });
+
+            setIsEdited({ ...isEdited, [day]: false });
         };
-        setIsEdited({ ...isEdited, [day]: false });
+        addNote();
     };
-    addNote();
+
+
+    const confirmPopUp = (day, date) => {
+        const stringDate = date.toDateString();
+        setModalData({ day, date: stringDate });
+        setIsModalOpen(true); // Open modal
+    };
+
+    const handleDeleteNote = (date) => {
+        const token = decryptToken();
+        axios.delete('/delete-note', {
+            headers: {
+                'Authorization': `Bearer ${token}` // Send the decrypted token
+            },
+            data: { date }
+        });
+    };
+
+    const handleConfirmDelete = () => {
+        handleDeleteNote(modalData.date);
+
+        // Close the modal and reset the selected column
+        setIsModalOpen(false);
+        setSelectedColumn(null);
+
+        //Create a copy of the current notes state
+        const updatedNotes = { ...notes };
+
+        //Clear note
+        updatedNotes[modalData.day] = '';
+        setNotes(updatedNotes);
+    };
+
+
+
+    return (
+        <div className="columns-container">
+            {weekdays.map((day, index) => {
+                const date = weekDates[index];
+                const isSelected = selectedDate && date && date.toDateString() === selectedDate.toDateString();
+                const isHighlighted = selectedColumn === index; // Check if the column is selected
+
+                return (
+                    <div
+                        key={day}
+                        className={`column ${isSelected || isHighlighted ? "highlight" : ""}`}
+                        onClick={() => setSelectedColumn(isHighlighted ? null : index)} // Toggle selection
+                    >
+                        <div className="day-name">{day}</div>
+                        <div className="date">{date ? date.getDate() : ""}</div>
+                        <textarea
+                            className="day-input"
+                            value={notes[day]}
+                            onChange={(event) => handleNoteChange(day, event)}
+                            placeholder={`Write a note for ${day}`}
+                        />
+
+                        {isEdited[day] && (
+                            <button className="note-save-btn" onClick={() => handleSubmit(day, date)} type="submit">
+                                Save Note
+                            </button>
+                        )}
+
+                        {isHighlighted && (
+                            <button className="note-delete-btn" onClick={() => confirmPopUp(day, date)}>
+                                Delete
+                            </button>
+                        )}
+                    </div>
+                );
+            })}
+            {/* Modal Component */}
+            <Modal
+                isOpen={isModalOpen}
+                title="Confirm Deletion"
+                message={`Are you sure you want to delete '${notes[modalData.day]}' for ${modalData.date}?`}
+                onConfirm={handleConfirmDelete}
+                onCancel={() => setIsModalOpen(false)}
+            />
+        </div>
+    );
 };
-
-const confirmPopUp = (day, date) => {
-    const stringDate = date.toDateString();
-    setModalData({ day, date: stringDate });
-    setIsModalOpen(true); // Open modal
-};
-
-const handleDeleteNote = (date) => {
-    const token = decryptToken();
-    axios.delete('/delete-note', {
-        headers: {
-            'Authorization': `Bearer ${token}` // Send the decrypted token
-        },
-        data: { date }
-    });
-};
-
-const handleConfirmDelete = () => {
-    handleDeleteNote(modalData.date);
-
-    // Close the modal and reset the selected column
-    setIsModalOpen(false);
-    setSelectedColumn(null);
-
-    //Create a copy of the current notes state
-    const updatedNotes = { ...notes };
-
-    //Clear note
-    updatedNotes[modalData.day] = '';
-    setNotes(updatedNotes);
-};
-
-
-
-return (
-    <div className="columns-container">
-        {weekdays.map((day, index) => {
-            const date = weekDates[index];
-            const isSelected = selectedDate && date && date.toDateString() === selectedDate.toDateString();
-            const isHighlighted = selectedColumn === index; // Check if the column is selected
-
-            return (
-                <div
-                    key={day}
-                    className={`column ${isSelected || isHighlighted ? "highlight" : ""}`}
-                    onClick={() => setSelectedColumn(isHighlighted ? null : index)} // Toggle selection
-                >
-                    <div className="day-name">{day}</div>
-                    <div className="date">{date ? date.getDate() : ""}</div>
-                    <textarea
-                        className="day-input"
-                        value={notes[day]}
-                        onChange={(event) => handleNoteChange(day, event)}
-                        placeholder={`Write a note for ${day}`}
-                    />
-
-                    {isEdited[day] && (
-                        <button className="note-save-btn" onClick={() => handleSubmit(day, date)} type="submit">
-                            Save Note
-                        </button>
-                    )}
-
-                    {isHighlighted && (
-                        <button className="note-delete-btn" onClick={() => confirmPopUp(day, date)}>
-                            Delete
-                        </button>
-                    )}
-                </div>
-            );
-        })}
-        {/* Modal Component */}
-        <Modal
-            isOpen={isModalOpen}
-            title="Confirm Deletion"
-            message={`Are you sure you want to delete '${notes[modalData.day]}' for ${modalData.date}?`}
-            onConfirm={handleConfirmDelete}
-            onCancel={() => setIsModalOpen(false)}
-        />
-    </div>
-);
 
 export default Weekdays;
