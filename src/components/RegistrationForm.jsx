@@ -36,7 +36,7 @@ const RegisterForm = () => {
         <form onSubmit={handleRegister}>
           <h1>Create account</h1>
           <h3>use your email for registration</h3>
-          <Input type="text" placeholder="Name" minLength={6} title="Enter your name here" item={name} setItem={setName} />
+          <Input type="text" placeholder="Name" minLength={3} title="Enter your name here" item={name} setItem={setName} />
           <Input type="email" placeholder="Email" title="Enter your email here" item={email} setItem={setEmail} />
           <Input
             type="password"
