@@ -8,7 +8,6 @@
 #title {
     margin-top: 50px;
 }
-
 /* Center the form */
 .auth-form-container {
     display: flex;
@@ -40,11 +39,10 @@
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
+
+
+
 
 a {
     color: #333;
@@ -89,7 +87,6 @@ form {
     padding: 0 50px;
     height: 100%;
     text-align: center;
-    width: 100%; /* Ensure form takes up all available space */
 }
 
 input {
@@ -98,7 +95,6 @@ input {
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
-    font-size: 14px;  /* Make input text smaller */
 }
 
 /* Overlay container for effects */
@@ -251,21 +247,10 @@ footer a {
 
 /* Responsive behavior for smaller screens */
 @media (max-width: 768px) {
-
-    /* Reduce font size for inputs and buttons */
-    input {
-        font-size: 14px; /* Make input text smaller */
-        padding: 10px 12px; /* Adjust padding */
+    .container {
+        width: 90%; /* Take up 90% of the screen width */
     }
-
-    button {
-        font-size: 14px;  /* Make button text smaller */
-        padding: 10px 30px; /* Adjust button padding */
+    .form-container{
+        margin-left: -9%; 
     }
-
-    .form-container {
-        margin-left: -20%; /* Move form container 10% to the left */
-    }
-
 }
-
