@@ -3,7 +3,7 @@
 /* Adjust calendar layout for smaller screens */
 @media (max-width: 768px) {
     .react-calendar {
-        width: 100%; /* Full width on mobile */
+        width: 90%; /* Full width on mobile */
         font-size: 0.8rem; /* Slightly smaller font size for mobile */
     }
 
@@ -48,12 +48,31 @@
 
 /* Navigation buttons */
 .react-calendar__navigation {
-    background-color: #FF416C; /* Change navigation bar color */
-    color: white; /* Change the color of navigation buttons */
+    background-color: #FF416C;
+    color: white;
+    width: 100%; /* Make it match the width of the calendar */
+    display: flex;
+    box-sizing: border-box;
 }
+
 
 /* Navigation button styles */
 .react-calendar__navigation__prev-button,
-.react-calendar__navigation__next-button {
-    color: white; /* Change the color of navigation buttons */
+.react-calendar__navigation__next-button,
+.react-calendar__navigation__arrow, .react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button,
+.react-calendar__navigation__label
+ {
+    width: 100%; /* Set a specific width */
+    height: 100%;
+    font-size: 12px;
+    padding: 0; /* Remove extra padding */
+    margin: 0 2px; /* Adjust spacing */
+    flex: 0 0 25px; /* Prevent buttons from growing */
+}
+
+
+.react-calendar__navigation__label {
+    justify-content: center;
+    align-items: center;
 }
