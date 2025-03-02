@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import WeeklyPlanner from "./WeeklyPlanner";
 import Chill from "./Chill";
-import Regristration from "./Registration";
 import Logout from "./Logout";
 import Auth from "./Auth";
 
@@ -15,7 +14,6 @@ function AppRouter() {
             <Route path="/chill" element={<Chill />} />
             <Route path="/login-register" element={<Auth />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/register" element={<Regristration />} />
         </Routes>
     );
 }
