@@ -8,6 +8,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -17,16 +18,22 @@ const RegisterForm = () => {
       return;
     }
 
+    setLoading(true); // Start loading
+
     try {
       const response = await axios.post('/register', {
         name,
         email,
         password,
       });
-      console.log('Registration successful', response.data.message);
+
+      console.log('Registration successful', response.data.user);
       window.location.href = '/login-register';
     } catch (error) {
-      console.error('Registration error:', error.response.data.message);
+      console.error('Registration error:', error.response?.data?.message || 'Something went wrong');
+      setError(error.response?.data?.message || 'Something went wrong');
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -35,7 +42,7 @@ const RegisterForm = () => {
       <div className='form-container'>
         <form onSubmit={handleRegister}>
           <h1>Create account</h1>
-          <h3>use your email for registration</h3>
+          <h3>Use your email for registration</h3>
           <Input type="text" placeholder="Name" minLength={3} title="Enter your name here" item={name} setItem={setName} />
           <Input type="email" placeholder="Email" title="Enter your email here" item={email} setItem={setEmail} />
           <Input
@@ -56,7 +63,14 @@ const RegisterForm = () => {
             setItem={setConfirmPassword}
           />
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <button type="submit">Register</button>
+
+          <button type="submit" disabled={loading}>
+            {loading ? (
+              <span className="loader"></span>
+            ) : (
+              'Register'
+            )}
+          </button>
         </form>
       </div>
     </div>
