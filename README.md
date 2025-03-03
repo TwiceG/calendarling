@@ -6,11 +6,11 @@
 
 ## About
 
-This app contains a calendar where you can add your notes, and it reminds you if you have a note on that day.  
-All you need to do is **register** to use the calendar function and access the **Chill Zone**, where you can find a  
-<a href="https://alpha-beatz.vercel.app/">Game</a> app that I developed too. 🎮
+This app contains a calendar where you can add notes, and it will remind you via email if you have a note on that day.  
+All you need to do is **register** to use the calendar functions and access the **Chill Zone**, where you can also find a  
+[**Game**](https://alpha-beatz.vercel.app/) app that I developed. 🎮
 
-> ⚠️ **NOTE:** This app is fully deployed, but you need to set up the **backend** and **database** for it to work correctly!
+> ⚠️ **NOTE:** This app is fully deployed, so if you want to set it up yourself, you'll need the [**backend**](#backend) part as well, and you'll need to set up a [**database**](#database) and **email service**.
 
 ---
 
@@ -18,9 +18,17 @@ All you need to do is **register** to use the calendar function and access the *
 
 This is the **frontend** part of the app, built using:
 
-- ![React-Vite Logo](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E) **React with Vite**
-- **Backend:** <a href="https://github.com/TwiceG/calendarling-backend">Laravel</a>
-- **Database:** <a href="https://supabase.com/">Supabase (PostgreSQL)</a>
+### **Frontend:** 
+  - [**React Vite**](https://github.com/TwiceG/calendarling)
+    ![React-Vite Logo](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+
+### **Backend:**  
+  - [**Laravel**](https://github.com/TwiceG/calendarling-backend)
+    ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+
+### **Database:**
+  - [**Supabase (PostgreSQL)**](https://supabase.com/)
+    ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
 ---
 
