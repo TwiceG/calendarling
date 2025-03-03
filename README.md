@@ -1,8 +1,20 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+<p align="center"><a href="https://calendarling-dia.vercel.app/" target="_blank"><img src="https://raw.githubusercontent.com/TwiceG/calendarling/refs/heads/development/src/assets/CalenDarling-logo2.png" width="450" alt="App Logo"></a></p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
+
+This app contains a calendar where you can add your notes and it reminds you if you have a note on that day. All you need to do is register to use the calendar function and to see the Chill zone where you can find a <a href="https://alpha-beatz.vercel.app/">Game</a> app that I developed too.
+
+⚠️ NOTE: This app is fully deployed so you need to setup backend and database too to work with it!
+## Stack
+This is the frontend part of the app and I used JS with framework:
+- ![React-Vite Logo](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+- My backend for this app is: <a href="https://github.com/TwiceG/calendarling-backend">Laravel</a>
+- I used <a href="https://supabase.com/">Supabase</a> postgres database to store the data for the app.
+
+## Contact
+
+If you have any questions about the project feel free to get in touch with me:
+
+`ggabor.gabor25@gmail.com`
