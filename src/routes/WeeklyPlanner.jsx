@@ -38,8 +38,12 @@ const WeeklyPlanner = () => {
                 <Calendar
                     locale="en-GB" onClickDay={handleDateClick} />
             </div>
+            {selectedDate ?
+                (<WeekdaysColumn weekDates={weekDates} selectedDate={selectedDate} /> /* Pass selectedDate to WeekdaysColumn */)
+                :
+                (<div className='user-director'>Please select a date to see your notes!</div>)
+            }
 
-            <WeekdaysColumn weekDates={weekDates} selectedDate={selectedDate} /> {/* Pass selectedDate to WeekdaysColumn */}
         </div>
     );
 };

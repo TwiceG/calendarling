@@ -1,12 +1,4 @@
-@media (max-width: 768px) {
-    .weekly-planner {
-        padding: 10px;
-    }
 
-    .calendar-container {
-        margin-bottom: 15px;
-    }
-}
 
 
 .weekly-planner {
@@ -21,4 +13,28 @@
     margin-bottom: 20px; 
     display: flex;
     justify-content: center; 
+}
+
+.user-director {
+    text-decoration:wavy;
+    text-decoration-line: overline underline;
+    text-decoration-color: #f11260;
+    text-underline-offset: 5px;
+    /* text-overline-offset: 5px; */
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .weekly-planner {
+        padding: 10px;
+    }
+
+    .calendar-container {
+        margin-bottom: 15px;
+    }
+    .user-director {
+        font-size: medium;
+    }
 }
