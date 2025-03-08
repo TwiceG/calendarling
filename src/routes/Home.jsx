@@ -1,5 +1,6 @@
 import 'react-calendar/dist/Calendar.css';
 import '../style/Home.css';
+import logo from '../assets/CalenDarling-logo3.png';
 
 const Home = () => {
     const message1 = "WELCOME"; // First part of the message
@@ -25,7 +26,9 @@ const Home = () => {
                 </span>
             </h1>
             <h2>This is </h2>
-            <h1>{name}</h1>
+            <h1>
+                <img className='logo' src={logo} alt="calendarling-logo" />
+            </h1>
         </div>
     );
 };

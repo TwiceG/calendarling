@@ -63,6 +63,10 @@
     margin-bottom: 0; /* Remove bottom margin to ensure it is the last block */
 }
 
+.logo {
+    margin-top: 50px;
+}
+
 /* Responsive styling */
 @media (max-width: 768px) {
     .wave-message {
@@ -75,5 +79,8 @@
 
     .home-container h1:last-of-type {
         font-size: 7vw !important;
+    }
+    .logo {
+        width: 360px;
     }
 }
