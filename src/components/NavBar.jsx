@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../style/NavBar.css';
+import logo from '../assets/CalenDarling-logo4.png';
 
 const NavBar = () => {
 
@@ -9,7 +10,7 @@ const NavBar = () => {
         <nav className="navbar">
             <ul className="nav-list">
                 <li className="nav-item">
-                    <Link to="/" className="nav-link" id='home'>Home</Link>
+                    <Link to="/" className="home-link" id='home'><img className='navbar-logo' src={logo} alt="calendarling-logo" /></Link>
                 </li>
             </ul>
 

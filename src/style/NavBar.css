@@ -68,7 +68,14 @@
     position: absolute;  /* Position the home button independently of the flex layout */
     top: 50%;  /* Center vertically */
     left: 50%;  /* Center horizontally */
-    transform: translate(-50%, -90%);  /* Adjust the button's position to truly center it */
+    height: 100%;
+    transform: translate(-50%, -80%);  /* Adjust the button's position to truly center it */
+}
+
+.navbar-logo {
+    width: 200px;
+    display: flex;
+    transform: translate(0,5%);
 }
 
 
@@ -97,7 +104,11 @@
     #home {
         position:absolute;
         margin-left: -100px;
-        transform: translate(-80%, -90%)
+        transform: translate(-70%, -75%);
+    }
+
+    .navbar-logo {
+        width: 110px;
     }
      
 }
