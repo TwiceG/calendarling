@@ -8,6 +8,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     // Function to encrypt the token
     const encryptAuthToken = (token) => {
@@ -21,6 +22,7 @@ const LoginForm = () => {
         setEmail('');
         setPassword('');
         setLoginError(null);
+        setLoading(false);
     }
 
     const storeUserName = (username) => {
@@ -31,6 +33,7 @@ const LoginForm = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post('/login', {
                 email: email,
@@ -63,7 +66,13 @@ const LoginForm = () => {
                     <Input type='email' placeholder='Email' item={email} setItem={setEmail} />
                     <Input type='password' placeholder='Password' item={password} setItem={setPassword} />
 
-                    <button type='submit'>Login</button>
+                    <button type="submit" disabled={loading}>
+                        {loading ? (
+                            <span className="loader"></span>
+                        ) : (
+                            'Login'
+                        )}
+                    </button>
                 </form>
                 {/* <Link to={'/password-recovery'} >Forgot your password?</Link> */}
             </div>
