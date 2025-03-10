@@ -27,7 +27,8 @@ const Home = () => {
             </h1>
             <h2>This is </h2>
             <h1>
-                <img className='logo' src={logo} alt="calendarling-logo" />
+                {name}
+                {/* <img className='logo' src={logo} alt="calendarling-logo" /> */}
             </h1>
         </div>
     );

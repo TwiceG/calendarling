@@ -30,6 +30,7 @@
 }
 
 .chill-btn {
+    margin-top: 80px; /* Adjust for navbar fixed position  */
     padding: 15px 30px;
     font-size: 20px;
     background-color: rgb(238, 106, 220);

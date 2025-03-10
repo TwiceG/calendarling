@@ -1,116 +1,101 @@
 /* Navbar container */
 .navbar {
-    position: relative;
-    display: flex;
-    justify-content: space-between; /* Space between items, aligning the home button to the center */
-    align-items: center;
+    position: fixed;
+    width: 100%;
     background-color: #FF416C;
-    padding: 15px 20px;
-    position: relative;
-}
-
-
-/* Navbar list that holds all nav items */
-.nav-list {
+    padding: 2px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .navbar-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .home-link {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    width: 200px;
+  }
+  
+  /* Navbar list */
+  .nav-list {
     list-style: none;
     display: flex;
+    gap: 30px;
     margin: 0;
     padding: 0;
-    width: 100%; /* Make the nav list span the entire width of the navbar */
-    justify-content: center; /* This ensures the Home button is centered */
-}
-
-/* Individual nav items */
-.nav-item {
-    margin-right: 30px; /* Space between items */
-}
-
-/* Remove margin for the last item */
-.nav-item:last-child {
-    margin-right: 0;
-}
-
-/* Styling the links */
-.nav-link {
-    color: #fff;
+  }
+  
+  .nav-item {
+    margin: 0;
+  }
+  
+  .nav-link {
+    color: #ffffff;
     text-decoration: none;
     font-size: 18px;
     padding: 10px 15px;
     transition: background-color 0.3s ease;
-    border-radius: 5px; /* Rounded corners */
-}
-
-/* Hover effect for links */
-.nav-link:hover {
+    border-radius: 5px;
+  }
+  
+  .nav-link:hover {
     background-color: #fd88b1;
-    color: #f4f4f4;
-}
-
-/* This will push user actions (login, register, logout) to the right */
-.user-actions {
-    display: flex;       /* Ensure items are displayed in a row */
-    gap: 20px;           /* Space between the buttons */
-    align-items: center; /* Align vertically if needed */
-    justify-content: flex-end; /* Align to the right side of the navbar */
-    margin-left: auto;   /* Push the items to the far right */
-}
-
-
-/* Remove the unnecessary <ul> around the user-actions */
-.auth-list {
-    display: flex; /* Ensures the items inside auth-list are in a row */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#home {
-    position: absolute;  /* Position the home button independently of the flex layout */
-    top: 50%;  /* Center vertically */
-    left: 50%;  /* Center horizontally */
-    height: 100%;
-    transform: translate(-50%, -80%);  /* Adjust the button's position to truly center it */
-}
-
-.navbar-logo {
-    width: 200px;
-    display: flex;
-    transform: translate(0,5%);
-}
-
-
-/* Responsive adjustments for small screens */
-@media screen and (max-width: 768px) {
-    /* Reduce the size of the navbar */
-    .navbar {
-        padding: 10px 15px;
+    color: #ffffff;
+  }
+  
+  /* Hamburger menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+  }
+  
+  .hamburger-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #cff4ff;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Mobile Styles */
+  @media screen and (max-width: 768px) {
+    .hamburger {
+      display: flex;
     }
-
-    /* Navbar list that holds all nav items */
+  
     .nav-list {
-        justify-content: flex-start; /* Align items to the left */
-        width: auto;  /* Allow list to shrink to fit items */
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #FF416C;
+      flex-direction: column;
+      width: 200px;
+      height: auto;
+      padding: 20px;
+      border-radius: 5px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
     }
-
-    /* Navbar items */
+  
+    .nav-list.open {
+      transform: translateX(0);
+    }
+  
     .nav-item {
-        margin-right: 20px;  /* Reduced spacing between items */
+      margin-bottom: 15px;
     }
-
-    /* Adjust font size on mobile */
-    .nav-link {
-        font-size: 14px;  /* Smaller font size for mobile */
-    }
-    #home {
-        position:absolute;
-        margin-left: -100px;
-        transform: translate(-70%, -75%);
-    }
-
-    .navbar-logo {
-        width: 110px;
-    }
-     
-}
-
-
+  }
+  

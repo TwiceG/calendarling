@@ -7,12 +7,14 @@
     flex-direction: column; /* Arrange items vertically */
     align-items: center; 
     padding: 20px;
+
 }
 
 .calendar-container {
     margin-bottom: 20px; 
     display: flex;
     justify-content: center; 
+    margin-top: 80px;
 }
 
 .user-director {
