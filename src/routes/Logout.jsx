@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
+import { motion } from "framer-motion";
+import "../style/Logout.css";
 
 const Logout = () => {
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Decrypt the token from localStorage
     const decryptToken = () => {
         const secretKey = import.meta.env.VITE_SECRET_KEY;
         const encryptedToken = localStorage.getItem('authToken');
@@ -12,17 +14,14 @@ const Logout = () => {
         return decryptedToken;
     };
 
-    // Clear user data from localStorage
     const clearUserData = () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('username');
     };
 
-
     const logoutUser = async () => {
         const token = decryptToken();
         try {
-            // Send logout request to backend
             await axios.post('/logout', {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -32,24 +31,45 @@ const Logout = () => {
         } catch (error) {
             console.error('Error logging out:', error);
         }
+        setIsLoading(false);
     };
 
     useEffect(() => {
         logoutUser();
-        // Delay the redirect to '/home' after 3 seconds
         const timer = setTimeout(() => {
             window.location.href = '/';
-        }, 3000); // 3 seconds delay
+        }, 3000);
 
-        // Clean up the timeout when the component unmounts
         return () => clearTimeout(timer);
     }, []);
 
     return (
-        <div>
-            <h2>You've been logged out!</h2>
-            <h3>Good Bye!</h3>
-        </div>
+        <motion.div
+            className="logout-container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+        >
+            <motion.h2
+                className="logout-message"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1 }}
+            >
+                You've been logged out!
+            </motion.h2>
+            <motion.h3
+                className="logout-submessage"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+            >
+                Goodbye!
+            </motion.h3>
+
+            {isLoading && <div className="spinner"></div>}
+        </motion.div>
     );
 };
 
