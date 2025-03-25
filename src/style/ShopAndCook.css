@@ -37,7 +37,6 @@
     align-items: flex-start; /* Ensures consistent alignment */
     justify-content: flex-start; /* Aligns items to the left */
     width: 100%; /* Ensures it takes up the full width */
-    align-items: center; /* Ensures vertical alignment */
     justify-content: center; /* Centers the lists */
 }
 

@@ -1,11 +1,22 @@
 import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import '../style/ShoppingList.css';
+import { Trash, CircleX, Trash2 } from 'lucide-react';
 
 const ShoppingList = () => {
     const [grocery, setGrocery] = useState('');
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
+    const [hoveredItems, setHoveredItems] = useState({});
+
+    const handleMouseEnter = (index) => {
+        setHoveredItems(prevState => ({ ...prevState, [index]: true }));
+    };
+
+    const handleMouseLeave = (index) => {
+        setHoveredItems(prevState => ({ ...prevState, [index]: false }));
+    };
+
 
     // Add a new grocery item
     const addGrocery = () => {
@@ -31,6 +42,13 @@ const ShoppingList = () => {
         const reorderedItems = reorder(items, result.source.index, result.destination.index);
         setItems(reorderedItems);
     };
+
+
+    const onDeleteListItem = (index) => {
+        const updatedList = [...items]; // Copy the list 
+        updatedList.splice(index, 1); // Remove the item 
+        setItems(updatedList);
+    }
 
     return (
         <div className="shp-list-container">
@@ -63,7 +81,15 @@ const ShoppingList = () => {
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
                                             >
-                                                {item}
+                                                <span>{item}</span>
+                                                <button
+                                                    className="delete-btn"
+                                                    onClick={() => onDeleteListItem(index)}
+                                                    onMouseEnter={() => handleMouseEnter(index)}
+                                                    onMouseLeave={() => handleMouseLeave(index)}
+                                                >
+                                                    {hoveredItems[index] ? <Trash2 /> : <Trash />}
+                                                </button>
                                             </div>
                                         )}
                                     </Draggable>

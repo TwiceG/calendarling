@@ -54,7 +54,25 @@ button {
     height: 40px;  /* Define a height for consistent drag behavior */
     width: 100%;  /* Ensures all items stretch to fit the container width */
     pointer-events: all;
+    position: relative;
 }
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;  /* Keeps it aligned to the right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn:hover > svg {
+    color: red;
+    transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
 
 .list-item:active {
     background: #d1d1d1;
