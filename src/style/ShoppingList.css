@@ -63,9 +63,15 @@ button {
     cursor: pointer;
     position: absolute;
     right: 10px;  /* Keeps it aligned to the right */
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.delete-btn svg {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, color 0.2s ease-in-out;
 }
 
 .delete-btn:hover > svg {
@@ -89,4 +95,23 @@ button {
     justify-content: center;
     color: #fad0c4;
     font-size: 1.2rem;
+}
+
+
+.shp-list-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Reduce spacing between elements */
+    padding: 5px 8px; /* Reduce padding */
+    background-color: rgba(253, 102, 137, 0.2); /* Light pink background */
+    border-radius: 6px; /* Optional: Slightly smaller border-radius */
+    max-width: 400px; /* Optional: Limit the width */
+    line-height: 1; /* Reduce line height to avoid extra space */
+}
+
+.editable-title {
+    font-size: 18px; /* Adjust font size if needed */
+    margin: 0;
+    padding: 2px 0; /* Remove unnecessary padding */
+    cursor: text;
 }

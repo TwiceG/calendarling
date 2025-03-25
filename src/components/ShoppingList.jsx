@@ -17,6 +17,12 @@ const ShoppingList = () => {
         setHoveredItems(prevState => ({ ...prevState, [index]: false }));
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            addGrocery();
+        }
+    };
+
 
     // Add a new grocery item
     const addGrocery = () => {
@@ -53,12 +59,22 @@ const ShoppingList = () => {
     return (
         <div className="shp-list-container">
             <div className="shp-list">
+                <span className='shp-list-title'>
+                    <h2
+                        className="editable-title"
+                        contentEditable
+                        suppressContentEditableWarning
+                    >
+                        Add title
+                    </h2>
+                </span>
                 <span className="list-item">
                     <input
                         type="text"
                         placeholder="Add an item you wish to buy!"
                         value={grocery}
                         onChange={(e) => setGrocery(e.target.value)}
+                        onKeyDown={handleKeyDown}
                     />
                     <button type="button" onClick={addGrocery}>Add</button>
                 </span>
