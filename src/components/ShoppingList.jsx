@@ -8,6 +8,8 @@ const ShoppingList = () => {
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
     const [hoveredItems, setHoveredItems] = useState({});
+    const [title, setTitle] = useState("Add title");
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleMouseEnter = (index) => {
         setHoveredItems(prevState => ({ ...prevState, [index]: true }));
@@ -59,15 +61,25 @@ const ShoppingList = () => {
     return (
         <div className="shp-list-container">
             <div className="shp-list">
-                <span className='shp-list-title'>
-                    <h2
-                        className="editable-title"
-                        contentEditable
-                        suppressContentEditableWarning
-                    >
-                        Add title
-                    </h2>
-                </span>
+                <div className="shp-list-title">
+                    {isEditing ? (
+                        <input
+                            type="text"
+                            className="editable-input"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            onBlur={() => setIsEditing(false)}
+                            autoFocus
+                        />
+                    ) : (
+                        <h2
+                            className="editable-title"
+                            onClick={() => setIsEditing(true)}
+                        >
+                            {title || "Add title"}
+                        </h2>
+                    )}
+                </div>
                 <span className="list-item">
                     <input
                         type="text"
