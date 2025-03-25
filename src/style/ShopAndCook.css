@@ -1,0 +1,44 @@
+.shp-cook-container {
+    display: flex;
+    flex-direction: column; /* Ensures the button stays above the lists */
+    align-items: center;
+    width: 100%;
+}
+
+
+.add-shp-list-btn {
+    margin-top: 100px;
+    padding: 8px 16px;  
+    font-size: 14px;    
+    background-color: #ff416c; 
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer;
+    display: inline-block; 
+    width: auto; 
+    height: auto;
+    text-align: center;
+    
+}
+
+.add-shp-list-btn:hover {
+    background-color: #e03e5d; /* Slightly darker hover effect */
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.shp-lists-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping when necessary */
+    gap: 20px; /* Space between lists */
+    align-items: flex-start; /* Ensures consistent alignment */
+    justify-content: flex-start; /* Aligns items to the left */
+    width: 100%; /* Ensures it takes up the full width */
+    align-items: center; /* Ensures vertical alignment */
+    justify-content: center; /* Centers the lists */
+}
+
+

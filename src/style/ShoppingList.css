@@ -1,0 +1,70 @@
+.shp-list-container {
+    display: flex;
+    margin-top: 80px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shp-list-container input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+button {
+    background-color: #ff416c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.grocery-items {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 100px;
+    border: 2px dashed #ccc;
+    padding: 10px;
+
+}
+
+.grocery-items.dragging-over {
+    border: 2px dashed #4c9ee7;
+}
+
+/* Draggable item styling */
+.list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: grab;
+    user-select: none; /* Prevent text selection during drag */
+    height: 40px;  /* Define a height for consistent drag behavior */
+    width: 100%;  /* Ensures all items stretch to fit the container width */
+    pointer-events: all;
+}
+
+.list-item:active {
+    background: #d1d1d1;
+    cursor: grabbing;
+}
+
+.list-item.dragging {
+    background-color: #c2e8f7;
+}
+
+.grocery-items:empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    font-size: 1.2rem;
+}

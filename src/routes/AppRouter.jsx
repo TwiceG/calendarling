@@ -4,6 +4,7 @@ import WeeklyPlanner from "./WeeklyPlanner";
 import Chill from "./Chill";
 import Logout from "./Logout";
 import Auth from "./Auth";
+import ShopAndCook from "./ShopAndCook";
 
 
 function AppRouter() {
@@ -14,6 +15,7 @@ function AppRouter() {
             <Route path="/chill" element={<Chill />} />
             <Route path="/login-register" element={<Auth />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/shop-cook" element={<ShopAndCook />} />
         </Routes>
     );
 }
