@@ -43,40 +43,50 @@ button {
 /* Draggable item styling */
 .list-item {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
     font-family: "Times New Roman", serif;
     padding: 10px;
     border-radius: 4px;
     cursor: grab;
-    user-select: none; /* Prevent text selection during drag */
-    height: 40px;  /* Define a height for consistent drag behavior */
-    width: 100%;  /* Ensures all items stretch to fit the container width */
+    user-select: none;
+    height: 40px;
+    width: 100%;
     pointer-events: all;
     position: relative;
 }
 
+/* Ensures text does not overlap with utils-container */
+.list-item span {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px; /* Prevents text from touching the utils-container */
+}
+
+/* Utils container to the right */
+.utils-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Delete button */
 .delete-btn {
     background: none;
     border: none;
     cursor: pointer;
-    position: absolute;
-    right: 10px;  /* Keeps it aligned to the right */
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.delete-btn svg {
     transition: opacity 0.3s ease-out, transform 0.3s ease-out, color 0.2s ease-in-out;
 }
 
 .delete-btn:hover > svg {
     color: red;
-    transform: scale(1.2); /* Slightly enlarge on hover */
+    transform: scale(1.2);
 }
 
 
@@ -102,16 +112,43 @@ button {
     display: flex;
     flex-direction: column;
     gap: 4px; /* Reduce spacing between elements */
-    padding: 5px 8px; /* Reduce padding */
-    background-color: rgba(253, 102, 137, 0.2); /* Light pink background */
-    border-radius: 6px; /* Optional: Slightly smaller border-radius */
-    max-width: 400px; /* Optional: Limit the width */
+    padding: 5px 8px; 
+    background-color: rgba(253, 102, 137, 0.2);
+    border-radius: 6px; 
+    max-width: 400px; 
     line-height: 1; /* Reduce line height to avoid extra space */
 }
 
 .editable-title {
-    font-size: 18px; /* Adjust font size if needed */
+    font-size: 18px; 
     margin: 0;
     padding: 2px 0; /* Remove unnecessary padding */
     cursor: text;
+}
+
+.bought-check-container {
+    position: absolute;
+    right: 0; /* Moves it to the far right */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bought-check {
+    width: 18px; /* Adjust size */
+    height: 18px;
+    cursor: pointer;
+    accent-color: #ff416c;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.bought-check:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+
+
+.crossed-out {
+    text-decoration: line-through;
+    opacity: 0.8;
 }

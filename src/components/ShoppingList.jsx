@@ -10,7 +10,10 @@ const ShoppingList = () => {
     const [hoveredItems, setHoveredItems] = useState({});
     const [title, setTitle] = useState("Add title");
     const [isEditing, setIsEditing] = useState(false);
+    const [checked, setChecked] = useState({});
 
+
+    // Add hover effect only to the hovered item
     const handleMouseEnter = (index) => {
         setHoveredItems(prevState => ({ ...prevState, [index]: true }));
     };
@@ -19,11 +22,22 @@ const ShoppingList = () => {
         setHoveredItems(prevState => ({ ...prevState, [index]: false }));
     };
 
+
+    // Handle 'Enter' keydown on input field
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             addGrocery();
         }
     };
+
+    const handleCheck = (index) => {
+        if (!checked[index]) {
+            setChecked(prevState => ({ ...prevState, [index]: true }));
+        } else {
+            setChecked(prevState => ({ ...prevState, [index]: false }));
+        }
+    }
+
 
 
     // Add a new grocery item
@@ -48,7 +62,14 @@ const ShoppingList = () => {
         if (!result.destination) return; // If dropped outside, do nothing
 
         const reorderedItems = reorder(items, result.source.index, result.destination.index);
+
+        const newChecked = {};
+        reorderedItems.forEach((item, newIndex) => {
+            const oldIndex = items.indexOf(item);
+            newChecked[newIndex] = checked[oldIndex] || false;
+        });
         setItems(reorderedItems);
+        setChecked(newChecked);
     };
 
 
@@ -56,6 +77,25 @@ const ShoppingList = () => {
         const updatedList = [...items]; // Copy the list 
         updatedList.splice(index, 1); // Remove the item 
         setItems(updatedList);
+
+        setChecked(prevChecked => {
+            const updatedChecked = { ...prevChecked };
+
+            // Delete the checked state for the removed item
+            delete updatedChecked[index];
+
+            // Create a new checked state object that shifts remaining items
+            const shiftedChecked = {};
+
+            // Reindex the remaining checked items based on their new positions
+            Object.keys(updatedChecked).forEach((key) => {
+                const newKey = key > index ? key - 1 : key;
+                shiftedChecked[newKey] = updatedChecked[key];
+            });
+
+            return shiftedChecked;
+        });
+        setCount(prevCount => prevCount - 1);
     }
 
     return (
@@ -79,6 +119,7 @@ const ShoppingList = () => {
                             {title || "Add title"}
                         </h2>
                     )}
+                    <span>{count} grocery item(s) to buy on your list</span>
                 </div>
                 <span className="list-item">
                     <input
@@ -109,15 +150,18 @@ const ShoppingList = () => {
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
                                             >
-                                                <span>{item}</span>
-                                                <button
-                                                    className="delete-btn"
-                                                    onClick={() => onDeleteListItem(index)}
-                                                    onMouseEnter={() => handleMouseEnter(index)}
-                                                    onMouseLeave={() => handleMouseLeave(index)}
-                                                >
-                                                    {hoveredItems[index] ? <Trash2 /> : <Trash />}
-                                                </button>
+                                                <span className={checked[index] ? "crossed-out" : ""}>{item}</span>
+
+                                                <div className='utils-container'>
+                                                    {/* Right-aligned utilities container */}
+                                                    <button className="delete-btn"
+                                                        onClick={() => onDeleteListItem(index)}
+                                                        onMouseEnter={() => handleMouseEnter(index)}
+                                                        onMouseLeave={() => handleMouseLeave(index)} >
+                                                        {hoveredItems[index] ? <Trash2 /> : <Trash />}
+                                                    </button>
+                                                    <input className="bought-check" type="checkbox" onChange={() => handleCheck(index)} checked={checked[index] || false} />
+                                                </div>
                                             </div>
                                         )}
                                     </Draggable>
