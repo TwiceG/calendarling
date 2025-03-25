@@ -251,9 +251,16 @@ footer a {
         width: 90%; /* Take up 90% of the screen width */
     }
     .form-container{
-        margin-left: -9%; 
+        justify-content: center;
+        align-items: center;
     }
+
 }
+@media (max-width: 440px) {
+    .container.right-panel-active .sign-up-container {
+        transform: translateX(85%);
+    }
+    }
 
 .loader {
     border: 4px solid rgba(255, 255, 255, 0.3);
