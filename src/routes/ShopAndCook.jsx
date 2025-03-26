@@ -1,16 +1,26 @@
 import { useState } from "react";
 import ShoppingList from "../components/ShoppingList";
 import "../style/ShopAndCook.css";
+import Modal from "../components/Modal";
 
 const ShopAndCook = () => {
     const [shoppingLists, setShoppingLists] = useState([{ id: 0 }]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentListId, setCurrentListId] = useState(0);
 
     const addShpList = () => {
         setShoppingLists([...shoppingLists, { id: shoppingLists.length }]);
     };
 
-    const deleteShoppingList = (id) => {
+    const handleDelete = (listId) => {
+        setIsModalOpen(true);
+        setCurrentListId(listId);
+
+    }
+
+    const handleConfirmDelete = (id) => {
         setShoppingLists(shoppingLists.filter(list => list.id !== id));
+        setIsModalOpen(false);
     };
 
     return (
@@ -24,10 +34,19 @@ const ShopAndCook = () => {
                 {shoppingLists.map((list) => (
                     <div key={list.id} className="shopping-list-wrapper">
                         <ShoppingList />
-                        <button onClick={() => deleteShoppingList(list.id)}>Delete</button>
+                        <button onClick={() => handleDelete(list.id)}>Delete</button>
                     </div>
+
                 ))}
             </div>
+            {/* Modal Component */}
+            <Modal
+                isOpen={isModalOpen}
+                title="Confirm Deletion"
+                message={`Are you sure you want to delete ?`}
+                onConfirm={() => handleConfirmDelete(currentListId)}
+                onCancel={() => setIsModalOpen(false)}
+            />
         </div>
     );
 };
