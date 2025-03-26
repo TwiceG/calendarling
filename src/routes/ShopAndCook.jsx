@@ -3,10 +3,14 @@ import ShoppingList from "../components/ShoppingList";
 import "../style/ShopAndCook.css";
 
 const ShopAndCook = () => {
-    const [shoppingLists, setShoppingLists] = useState([<ShoppingList key={0} />]);
+    const [shoppingLists, setShoppingLists] = useState([{ id: 0 }]);
 
     const addShpList = () => {
-        setShoppingLists([...shoppingLists, <ShoppingList key={shoppingLists.length} />]);
+        setShoppingLists([...shoppingLists, { id: shoppingLists.length }]);
+    };
+
+    const deleteShoppingList = (id) => {
+        setShoppingLists(shoppingLists.filter(list => list.id !== id));
     };
 
     return (
@@ -17,7 +21,12 @@ const ShopAndCook = () => {
                 </button>
             </div>
             <div className="shp-lists-container">
-                {shoppingLists}
+                {shoppingLists.map((list) => (
+                    <div key={list.id} className="shopping-list-wrapper">
+                        <ShoppingList />
+                        <button onClick={() => deleteShoppingList(list.id)}>Delete</button>
+                    </div>
+                ))}
             </div>
         </div>
     );
