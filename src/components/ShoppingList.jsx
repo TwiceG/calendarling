@@ -1,16 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import '../style/ShoppingList.css';
-import { Trash, CircleX, Trash2 } from 'lucide-react';
+import { Trash, CircleX, Trash2, SaveIcon } from 'lucide-react';
+import axios from 'axios';
+import CryptoJS from 'crypto-js';
 
-const ShoppingList = () => {
-    const [grocery, setGrocery] = useState('');
+const ShoppingList = ({ listItems, id, listTitle }) => {
+    const [newItemName, setNewItemName] = useState('');
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
     const [hoveredItems, setHoveredItems] = useState({});
     const [title, setTitle] = useState("Add title");
     const [isEditing, setIsEditing] = useState(false);
-    const [checked, setChecked] = useState({});
+    const [listId, setListId] = useState();
+
+    const decryptToken = () => {
+        const secretKey = import.meta.env.VITE_SECRET_KEY;
+        const encryptedToken = localStorage.getItem('authToken');
+        const decryptedToken = CryptoJS.AES.decrypt(encryptedToken, secretKey).toString(CryptoJS.enc.Utf8);
+        return decryptedToken;
+    };
+
+
+    // Initialize state when listItems prop is received
+    useEffect(() => {
+        setTitle(listTitle);
+        setListId(id);
+        setItems(listItems);
+        setCount(listItems.length);
+
+    }, [listItems]);
+
+
 
 
     // Add hover effect only to the hovered item
@@ -31,23 +52,31 @@ const ShoppingList = () => {
     };
 
     const handleCheck = (index) => {
-        if (!checked[index]) {
-            setChecked(prevState => ({ ...prevState, [index]: true }));
-        } else {
-            setChecked(prevState => ({ ...prevState, [index]: false }));
-        }
-    }
-
+        setItems(prevItems =>
+            prevItems.map(item =>
+                item.position === index ? { ...item, is_checked: !item.is_checked } : item
+            )
+        );
+    };
 
 
     // Add a new grocery item
     const addGrocery = () => {
-        if (grocery.trim() !== '') {
-            setItems([...items, grocery]);
-            setGrocery('');
+        if (newItemName.trim() !== '') {
+            const newItem = {
+                grocery_list_id: listId,
+                item_name: newItemName,
+                is_checked: false,
+                position: items.length,
+            };
+
+            setItems(prevItems => [...prevItems, newItem]);
+            setNewItemName('');
             setCount(prevCount => prevCount + 1);
+            console.log(items);
         }
     };
+
 
     // Reorder helper function
     const reorder = (list, startIndex, endIndex) => {
@@ -61,42 +90,89 @@ const ShoppingList = () => {
     const handleDragEnd = (result) => {
         if (!result.destination) return; // If dropped outside, do nothing
 
+        // Reorder the items based on the drag result
         const reorderedItems = reorder(items, result.source.index, result.destination.index);
 
-        const newChecked = {};
-        reorderedItems.forEach((item, newIndex) => {
-            const oldIndex = items.indexOf(item);
-            newChecked[newIndex] = checked[oldIndex] || false;
-        });
-        setItems(reorderedItems);
-        setChecked(newChecked);
+        // Update the position for each item in the reordered list
+        const updatedItems = reorderedItems.map((item, index) => ({
+            ...item,
+            position: index,
+        }));
+
+        setItems(updatedItems);
     };
 
 
-    const onDeleteListItem = (index) => {
-        const updatedList = [...items]; // Copy the list 
-        updatedList.splice(index, 1); // Remove the item 
-        setItems(updatedList);
-
-        setChecked(prevChecked => {
-            const updatedChecked = { ...prevChecked };
-
-            // Delete the checked state for the removed item
-            delete updatedChecked[index];
-
-            // Create a new checked state object that shifts remaining items
-            const shiftedChecked = {};
-
-            // Reindex the remaining checked items based on their new positions
-            Object.keys(updatedChecked).forEach((key) => {
-                const newKey = key > index ? key - 1 : key;
-                shiftedChecked[newKey] = updatedChecked[key];
+    const onDeleteListItem = async (index, itemId) => {
+        const token = decryptToken();
+        try {
+            await axios.delete(`/delete-item/${itemId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
 
-            return shiftedChecked;
-        });
-        setCount(prevCount => prevCount - 1);
+            // Only update state if the API call succeeds
+            const updatedList = [...items];
+            updatedList.splice(index, 1); // Remove the item 
+
+            // Update the positions of remaining items
+            const updatedItems = updatedList.map((item, i) => ({
+                ...item,
+                position: i, // Reassign position based on new index
+            }));
+
+            setItems(updatedItems);
+            setCount(prevCount => prevCount - 1);
+
+            console.log("Updated Items after delete:", updatedItems);
+        } catch (error) {
+            console.error("Error deleting item:", error.message);
+        }
+    };
+
+    const saveItems = async (token) => {
+        try {
+            const response = await axios.post("/save-items",
+                {
+                    list_id: listId,
+                    items: items
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            return response.data;
+        } catch (error) {
+            console.error("Error saving grocery list:", error.message);
+        }
     }
+
+    const saveTitle = async (token) => {
+        try {
+            const response = await axios.post("/add-grocery-list",
+                {
+                    title: title,
+                    listId: listId
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
+        } catch (error) {
+            console.error("Error saving title:", error);
+        }
+    }
+
+    const saveShoppingList = async () => {
+        const token = decryptToken();
+        saveItems(token);
+        saveTitle(token);
+    }
+
 
     return (
         <div className="shp-list-container">
@@ -120,13 +196,14 @@ const ShoppingList = () => {
                         </h2>
                     )}
                     <span>{count} grocery item(s) to buy on your list</span>
+                    <button className='save-btn' onClick={saveShoppingList}>Save</button>
                 </div>
                 <span className="list-item">
                     <input
                         type="text"
                         placeholder="Add an item you wish to buy!"
-                        value={grocery}
-                        onChange={(e) => setGrocery(e.target.value)}
+                        value={newItemName}
+                        onChange={(e) => setNewItemName(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
                     <button type="button" onClick={addGrocery}>Add</button>
@@ -150,17 +227,17 @@ const ShoppingList = () => {
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
                                             >
-                                                <span className={checked[index] ? "crossed-out" : ""}>{item}</span>
+                                                <span className={item.is_checked ? "crossed-out" : ""}>{item.item_name}</span>
 
                                                 <div className='utils-container'>
                                                     {/* Right-aligned utilities container */}
                                                     <button className="delete-btn"
-                                                        onClick={() => onDeleteListItem(index)}
+                                                        onClick={() => onDeleteListItem(index, item.id)}
                                                         onMouseEnter={() => handleMouseEnter(index)}
                                                         onMouseLeave={() => handleMouseLeave(index)} >
                                                         {hoveredItems[index] ? <Trash2 /> : <Trash />}
                                                     </button>
-                                                    <input className="bought-check" type="checkbox" onChange={() => handleCheck(index)} checked={checked[index] || false} />
+                                                    <input className="bought-check" type="checkbox" onChange={() => handleCheck(index)} checked={item.is_checked || false} />
                                                 </div>
                                             </div>
                                         )}
