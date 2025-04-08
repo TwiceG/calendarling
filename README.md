@@ -12,8 +12,8 @@ All you need to do is **register** to use the calendar functions and access the 
 It is still getting new features, the latest is the Shop and Cook tab where u can make shopping list , rearrange them and more.
 
 For testing my site you can use the test user:
-email: test@test.com
-password: test
+- email: test@test.com
+- password: test
 
 > ⚠️ **NOTE:** The first aciton on the website can be slow, because I use only free charge service that makes the backend go to "sleep" mode when its not used, thank you for your understanding and patience.
 
