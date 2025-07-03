@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Input from './Input';
 import CryptoJS from "crypto-js";
+import { Link } from "react-router-dom";
 
 
 const LoginForm = () => {
@@ -73,8 +74,10 @@ const LoginForm = () => {
                             'Login'
                         )}
                     </button>
+                    <div className='login-footer'>
+                        <Link to={'/password-recovery'} >Forgot your password?</Link>
+                    </div>
                 </form>
-                {/* <Link to={'/password-recovery'} >Forgot your password?</Link> */}
             </div>
         </div>
     );

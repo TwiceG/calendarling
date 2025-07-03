@@ -5,6 +5,8 @@ import Chill from "./Chill";
 import Logout from "./Logout";
 import Auth from "./Auth";
 import ShopAndCook from "./ShopAndCook";
+import PasswordRecovery from "./PasswordRecovery";
+import PasswordReset from "./PasswordReset";
 
 
 function AppRouter() {
@@ -16,6 +18,8 @@ function AppRouter() {
             <Route path="/login-register" element={<Auth />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/shop-cook" element={<ShopAndCook />} />
+            <Route path="/password-recovery" element={<PasswordRecovery />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
         </Routes>
     );
 }
