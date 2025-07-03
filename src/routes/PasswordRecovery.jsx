@@ -8,7 +8,7 @@ const PasswordRecovery = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
-    const sendEmail = async () => {
+    const sendEmail = async (e) => {
         e.preventDefault();
         setMessage('');
         setError('');
@@ -29,6 +29,8 @@ const PasswordRecovery = () => {
                 <Input type='email' placeholder='Email' item={email} setItem={setEmail} />
                 <button type="submit">Submit</button>
             </form>
+            {message && <p className="success-message">{message}</p>}
+            {error && <p className="error-message">{error}</p>}
         </div>
     )
 

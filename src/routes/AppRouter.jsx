@@ -19,7 +19,7 @@ function AppRouter() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/shop-cook" element={<ShopAndCook />} />
             <Route path="/password-recovery" element={<PasswordRecovery />} />
-            <Route path="/password-reset" element={<PasswordReset />} />
+            <Route path="/reset-password" element={<PasswordReset />} />
         </Routes>
     );
 }

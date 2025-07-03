@@ -1,8 +1,11 @@
 import axios from "axios";
 import '../style/PasswordReset.css';
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import Input from "../components/Input";
 
 const PasswordReset = () => {
+    const [searchParams] = useSearchParams();
 
     const token = searchParams.get('token');
     const email = searchParams.get('email');
@@ -13,17 +16,19 @@ const PasswordReset = () => {
     const [loading, setLoading] = useState(false);
 
     const handleNewPassword = async (e) => {
+        e.preventDefault();
         try {
-            const response = await axios.post('/password-change', {
+            const response = await axios.post('/change-password', {
                 email,
                 password,
+                password_confirmation: confirmPassword,
                 token
             });
 
             console.log('Your password has been changed successfully', response.data.user);
             window.location.href = '/login-register';
         } catch (error) {
-            console.error('Registration error:', error.response?.data?.message || 'Something went wrong');
+            console.error('Password change error:', error.response?.data?.message || 'Something went wrong');
             setError(error.response?.data?.message || 'Something went wrong');
         }
     }
