@@ -3,7 +3,8 @@ import AppRouter from './routes/AppRouter';
 import NavBar from './components/NavBar';
 import './style/App.css';
 import axios from 'axios';
-// import useDailyEmailCheck from './hooks/useDailyEmailCheck';
+import Chatbot from './components/Chatbot';
+
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <AppRouter />
+        <Chatbot />
       </BrowserRouter>
     </div>
   );

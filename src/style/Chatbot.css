@@ -1,0 +1,89 @@
+.chat-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    transition: background 0.3s;
+  }
+  
+  .chat-fab:hover {
+    background: #3730a3;
+  }
+  
+  .chat-modal {
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .chat-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 80%;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .chat-close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #444;
+    z-index: 1;
+  }
+  
+  .chatbot-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .chat-content {
+      width: 95%;
+      height: 85%;
+    }
+  
+    .chat-fab {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+    }
+  }
+  
