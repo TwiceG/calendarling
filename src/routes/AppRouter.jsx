@@ -8,6 +8,7 @@ import ShopAndCook from "./ShopAndCook";
 import PasswordRecovery from "./PasswordRecovery";
 import PasswordReset from "./PasswordReset";
 import Helpdesk from "./Helpdesk";
+import HelpdeskAgent from "./HeldeskAgent";
 
 
 
@@ -23,6 +24,7 @@ function AppRouter() {
             <Route path="/password-recovery" element={<PasswordRecovery />} />
             <Route path="/reset-password" element={<PasswordReset />} />
             <Route path="/helpdesk" element={<Helpdesk />} />
+            <Route path="/helpdesk-agent" element={<HelpdeskAgent />} />
         </Routes>
     );
 }
