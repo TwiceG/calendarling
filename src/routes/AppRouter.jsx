@@ -7,6 +7,8 @@ import Auth from "./Auth";
 import ShopAndCook from "./ShopAndCook";
 import PasswordRecovery from "./PasswordRecovery";
 import PasswordReset from "./PasswordReset";
+import Helpdesk from "./Helpdesk";
+
 
 
 function AppRouter() {
@@ -20,6 +22,7 @@ function AppRouter() {
             <Route path="/shop-cook" element={<ShopAndCook />} />
             <Route path="/password-recovery" element={<PasswordRecovery />} />
             <Route path="/reset-password" element={<PasswordReset />} />
+            <Route path="/helpdesk" element={<Helpdesk />} />
         </Routes>
     );
 }

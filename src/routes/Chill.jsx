@@ -1,4 +1,5 @@
 import '../style/Chill.css';
+import Chat from '../components/Chat';
 
 const Chill = () => {
     return (
