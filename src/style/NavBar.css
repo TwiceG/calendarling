@@ -2,7 +2,7 @@
 .navbar {
     position: fixed;
     width: 100%;
-    background-color: #FF416C;
+    background: linear-gradient(135deg,#fa5790 20%, #e61e1ec9 100%);
     padding: 2px 20px;
     display: flex;
     justify-content: space-between;

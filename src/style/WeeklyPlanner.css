@@ -3,7 +3,7 @@
 
 .weekly-planner {
     display: flex;
-    background-color:  #FF73A3;
+    background: linear-gradient(135deg, #fa5790 25%, #764ba2 120%);
     flex-direction: column; /* Arrange items vertically */
     align-items: center; 
     padding: 20px;
