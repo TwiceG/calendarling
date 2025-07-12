@@ -21,6 +21,7 @@ const HelpdeskChat = () => {
     // Helpdesk user ID
     const HELPDESK_USER_ID = 11;
 
+
     // CONSISTENT CHANNEL NAMING FUNCTION
     const createChannelName = (user1Id, user2Id) => {
         // Always put the smaller ID first for consistency
@@ -119,7 +120,7 @@ const HelpdeskChat = () => {
         setChatChannel(channelName);
 
         console.log(`🔗 Helpdesk connecting to channel: ${channelName}`);
-
+        const apiURL = import.meta.env.VITE_API_URL;
         const echo = new Echo({
             broadcaster: 'reverb',
             key: 'some-random-key',
@@ -129,7 +130,7 @@ const HelpdeskChat = () => {
             forceTLS: true,
             encrypted: true,
             enabledTransports: ['ws', 'wss'],
-            authEndpoint: '/broadcasting/auth',
+            authEndpoint: `${apiURL}/broadcasting/auth`,
             auth: {
                 headers: {
                     Authorization: `Bearer ${token}`,
