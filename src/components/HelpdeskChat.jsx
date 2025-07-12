@@ -51,7 +51,7 @@ const HelpdeskChat = () => {
             }
 
             try {
-                const res = await axios.get('https://calendarling-backend.fly.dev/api/me', {
+                const res = await axios.get('/me', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -79,7 +79,7 @@ const HelpdeskChat = () => {
 
     const fetchAvailableUsers = async (token) => {
         try {
-            const res = await axios.get('https://calendarling-backend.fly.dev/api/helpdesk/conversations', {
+            const res = await axios.get('/api/helpdesk/conversations', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -129,7 +129,7 @@ const HelpdeskChat = () => {
             forceTLS: true,
             encrypted: true,
             enabledTransports: ['ws', 'wss'],
-            authEndpoint: 'https://calendarling-backend.fly.dev/api/broadcasting/auth',
+            authEndpoint: '/broadcasting/auth',
             auth: {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -204,7 +204,7 @@ const HelpdeskChat = () => {
 
         try {
             const res = await axios.post(
-                'https://calendarling-backend.fly.dev/api/send-message',
+                '/send-message',
                 {
                     message: newMessage.trim(),
                     receiver_id: selectedUserId
@@ -257,7 +257,7 @@ const HelpdeskChat = () => {
         if (!token) return;
 
         try {
-            const res = await axios.get(`https://calendarling-backend.fly.dev/api/messages/${userId}`, {
+            const res = await axios.get(`/messages/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
